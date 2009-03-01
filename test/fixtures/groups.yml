@@ -1,0 +1,60 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+atlanta:
+  title: Atlanta
+  description: 
+  url: 
+
+boise:
+  title: Boise Ruby Group
+  description: 
+  url: 
+
+chicago:
+  title: Chicago.rb
+  description: 
+  url: 
+
+indianapolis:
+  title: Indianapolis Ruby Squad
+  description: 
+  url: 
+
+joliet:
+  title: South Chicago Ruby Group
+  description: 
+  url: 
+
+losangeles:
+  title: LA Ruby Group
+  description: 
+  url: 
+
+madison:
+  title: Madison, WI Ruby Group 
+  description: 
+  url: 
+
+miami:
+  title: Miami
+  description: 
+  url: 
+pittsburgh:
+  title: Pirate Ruby Group
+  description: 
+  url: 
+
+portland:
+  title: Ruby Trailblazers
+  description: 
+  url: 
+
+spokane:
+  title: Eastern Washington Ruby Group
+  description: 
+  url: 
+
+seattle:
+  title: Seattle.rb
+  description: 
+  url: 

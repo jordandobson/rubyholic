@@ -1,0 +1,234 @@
+/*  Jordan R. Dobson : 28 Feb 2008*/
+
+/* E.M. Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li, menu, 
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+	list-style: none;
+}
+:focus {	outline: 0;}
+abbr {	  border: none;  }
+hr,
+br,
+.hide { 
+  display: none;
+}
+a{ 
+  color: #c32f19;
+  text-decoration: none;
+}
+a:hover, a:focus{
+  color: #000;
+}
+/* Html & Body Wrappers*/
+html {
+	margin: 0;
+	padding: 0;
+	/* For iPhone */
+  display: block;
+}
+body {
+	line-height: 1;
+  color: #333;
+  width: 100%;
+  display: block;
+  font-size: 20px;
+	margin: 0;
+	padding: 0;
+  text-align: center;
+  overflow-x: hidden;
+  font-family: helvetica, arial, sans-serif;
+  padding-bottom: 2em;
+  background-color: #eee;
+}
+div#pgWrap{
+  width: 640px;
+  margin: 0 auto;
+}
+h1{
+  width: 235px;
+  height: 63px;
+  margin: 20px auto 17px auto;
+}
+h1 a{
+  background-image: url('/images/logo.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow: hidden;
+  display: block;
+  text-indent: -300em;
+  width: 235px;
+  height: 63px;
+  opacity: .99;
+}
+h1 a:hover{
+  opacity: .66;
+}
+div#top{
+  margin: 0px;
+}
+div#top form{
+  display: block;
+  padding: 10px;
+  background-color: #333;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  position: relative;
+}
+div#top form input{
+  text-align: center;
+  font-size: 1em;
+  width:100%;
+  color: #c32f19;
+  cursor: pointer;
+  word-spacing: .25em;
+}
+div#top form input:hover,
+div#top form input:focus{
+  color: #000;
+}
+div#top form:before{
+  content: " ";
+  display: block;
+  width: 13px;
+  height: 100%;
+  position: absolute;
+  margin-top: -9px;
+  margin-left: 5px;
+  background-image: url('/images/search.png');  
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+h2{
+  text-align: left;
+  background-color: #3cd0e6;
+  padding: 10px 20px;
+  color: #fff;
+  font-weight: bold;
+  font-family: "Arial Black", arial, sans-serif;
+  font-weight: bold;
+  text-transform: Uppercase;
+  letter-spacing: .05em;
+  text-shadow: 1px 1px 1px #999;
+  line-height: 1em;
+  height: 1em;
+}
+div#pgHome{
+  border: 1px solid #333;
+  border-top: none;
+  -moz-border-radius-bottomleft: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -moz-border-radius-bottomright: 20px;
+  -webkit-border-bottom-right-radius: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  position: relative;
+}
+div#pgHome menu{
+  height: 1em;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 10;
+}
+div#pgHome menu li{
+  display: inline;
+}
+div#pgHome menu li a,
+div#pgHome ul li a{
+  display: block;
+  float: right;
+  background-color: #fff;
+  font-size: .5em;
+  text-transform: Uppercase;
+  line-height: 2em;
+  padding: 0 1em;
+  -webkit-border-radius: 10px;
+  -webkit-box-shadow: 1px 1px 1px #1e6873;
+  font-weight: bold;
+  word-spacing: 10px;
+  letter-spacing: 1px;
+}
+div#pgHome menu li a:hover,
+div#pgHome ul li a:hover{
+  background-color: #000;
+  font-size: .5em;
+  text-transform: Uppercase;
+  line-height: 2em;
+  padding: 0 1em;
+  -webkit-border-radius: 10px;
+  color: #fff;
+}
+div#pgHome menu li a:active,
+div#pgHome ul li a:active{
+  -webkit-box-shadow: 1px 1px 1px #2d9cac;
+  background-color: #1e6873;
+}
+div#pgHome ol{
+  text-align: left;
+  background-color: #fff;
+}
+div#pgHome ol li{}
+div#pgHome ol li a{
+  display: block;
+  padding: 9px 30px 10px 30px;
+  font-size: 150%;
+  border-bottom: 1px solid #ccc;
+  background-image: url('/images/chevron.png');
+  background-position: 95% 50%;
+  background-repeat: no-repeat;
+}
+div#pgHome ol li a:hover{
+  background-color: #ddd;
+}
+div#pgHome ul{
+  padding: 10px 20px 10px 20px;
+  height: 1em;
+  background-color: #3cd0e6;
+  -moz-border-radius-bottomleft: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -moz-border-radius-bottomright: 20px;
+  -webkit-border-bottom-right-radius: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+}
+div#pgHome ul li{
+  display: inline;
+}
+div#pgHome ul li a{
+  display: block;
+  float: right;
+  background-color: #fff;
+  font-size: .5em;
+  text-transform: Uppercase;
+  line-height: 2em;
+  padding: 0 1em;
+  -webkit-border-radius: 10px;
+  -webkit-box-shadow: 1px 1px 1px #1e6873;
+  font-weight: bold;
+  word-spacing: 3px;
+  letter-spacing: 1px;
+}
+div#pgHome ul li input{
+  float: left;
+  width: 60px;
+  margin-right: 20px;
+}
+

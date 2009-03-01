@@ -1,0 +1,27 @@
+<% if @sort_order =~ /asc/i 
+  direction = 'Sort &#9650;'
+  order = 'DESC'
+else
+  direction = 'Sort &#9660;'
+  order = 'ASC'
+end -%>
+<div id="pgHome">
+  <hr size="1" />
+  <div id="head">
+    <h2>Ruby Groups</h2>
+    <menu>
+      <li><%= link_to direction, :controller => 'groups', :action => "index", :order => order %></li>
+    </menu>
+  </div>
+  <ol>
+  <% for group in @groups -%>
+    <li><%= link_to group.title, group, :title => group.description %></li>
+  <% end -%>
+  </ol>
+  <hr size="1" />
+  <ul>
+    <li><%= link_to 'Add Group', new_group_path %></li>
+    <li><input disabled="disabled" type="button" value="Back" /></li>
+    <li><input disabled="disabled" type="button" value="Next" /></li>
+  </ul>
+</div>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  venue: MyString
+  address: MyText
+  lat: 1.5
+  lng: 1.5
+  note: MyText
+
+two:
+  venue: MyString
+  address: MyText
+  lat: 1.5
+  lng: 1.5
+  note: MyText
