@@ -53,4 +53,26 @@ class GroupsControllerTest < ActionController::TestCase
     assert_match expected, @response.body
   end
 
+  test "should sort by locations ascending" do
+    get :index, :s => 'asc', :by => 'locations'
+    assert_response :success
+    assert_template "index"
+    assert_match /#{"&#9650;"}/, @response.body
+    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=locations&amp;s=asc\">Location<\/a>\s*<\/b>\s*<\/li>/m, @response.body
+    n = 'name'
+    expected = /#{@grps['eleven'][n]}.*#{@grps['eight'][n]}.*#{@grps['seven'][n]}.*#{@grps['twelve'][n]}.*#{@grps['nine'][n]}.*#{@grps['six'][n]}.*#{@grps['one'][n]}.*#{@grps['ten'][n]}.*#{@grps['two'][n]}.*#{@grps['three'][n]}.*/m
+    assert_match expected, @response.body
+  end
+
+  test "should sort by locations descending" do
+    get :index, :s => 'desc', :by => 'locations'
+    assert_response :success
+    assert_template "index"
+    assert_match /#{"&#9660;"}/, @response.body
+    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=locations&amp;s=asc\">Location<\/a>\s*<\/b>\s*<\/li>/m, @response.body
+    n = 'name'
+    expected = /#{@grps['five'][n]}.*#{@grps['four'][n]}.*#{@grps['three'][n]}.*#{@grps['two'][n]}.*#{@grps['one'][n]}.*#{@grps['ten'][n]}.*#{@grps['eleven'][n]}.*#{@grps['eight'][n]}.*#{@grps['seven'][n]}.*#{@grps['twelve'][n]}.*/m
+    assert_match expected, @response.body
+  end
+
 end
