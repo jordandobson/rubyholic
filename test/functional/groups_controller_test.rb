@@ -93,16 +93,12 @@ class GroupsControllerTest < ActionController::TestCase
     get :index, :s => 'asc', :by => 'locations'
     groups =  assigns(:groups)
     n = 'name'
-    assert_equal groups[0].name, @grps['eleven'][n]
-    assert_equal groups[1].name, @grps['eight'] [n]
-    assert_equal groups[2].name, @grps['seven'] [n]
-    assert_equal groups[3].name, @grps['twelve'][n]
-    assert_equal groups[4].name, @grps['nine']  [n]
-    assert_equal groups[5].name, @grps['six']   [n]
-    assert_equal groups[6].name, @grps['one']   [n]
-    assert_equal groups[7].name, @grps['ten']   [n]
-    assert_equal groups[8].name, @grps['two']   [n]
-    assert_equal groups[9].name, @grps['three'] [n]
+    assert_equal groups[0].name, @grps['one']   [n]
+    assert_equal groups[1].name, @grps['ten']   [n]
+    assert_equal groups[2].name, @grps['two']   [n]
+    assert_equal groups[3].name, @grps['three'] [n]
+    assert_equal groups[4].name, @grps['four']  [n]
+    assert_equal groups[5].name, @grps['five']  [n]
   end
 
   test "should sort by location descending" do
@@ -115,10 +111,6 @@ class GroupsControllerTest < ActionController::TestCase
     assert_equal groups[3].name, @grps['two']   [n]
     assert_equal groups[4].name, @grps['one']   [n]
     assert_equal groups[5].name, @grps['ten']   [n]
-    assert_equal groups[6].name, @grps['eleven'][n]
-    assert_equal groups[7].name, @grps['eight'] [n]
-    assert_equal groups[8].name, @grps['seven'] [n]
-    assert_equal groups[9].name, @grps['twelve'][n]
   end
 
 end
