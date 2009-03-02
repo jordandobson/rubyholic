@@ -10,10 +10,24 @@
   <div id="pgWrap">
     <div id="top">
       <h1><a href="/" title="Home">Ruby<em>holic</em></a></h1>
-      <form><input type="search" disabled="disabled" type="text" id="search" value="Search For Ruby Groups Near You" /></form>
+      <form><input type="search" type="text" id="search" value="Search For Ruby Groups Near You" /></form>
       <div id="flash" style="color: green;"><%= flash[:notice] %></div>
     </div>
     <%= yield  %>
   </div>
+  <script>
+    var search_field = document.getElementById("search");
+    var default_search = "Search For Ruby Groups Near You"
+    search_field.onfocus = function(){
+        if (search_field.value == default_search){
+          search_field.value = "";
+        }
+    }
+    search_field.onblur = function(){
+        if (search_field.value == ""){
+          search_field.value = default_search;
+        }
+    }
+  </script>
 </body>
 </html>
