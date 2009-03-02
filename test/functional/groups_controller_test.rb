@@ -4,7 +4,6 @@ class GroupsControllerTest < ActionController::TestCase
 
   def setup
     @grps = YAML.load_file("#{RAILS_ROOT}/test/fixtures/groups.yml")
-    @locs = YAML.load_file("#{RAILS_ROOT}/test/fixtures/locations.yml")
   end
 
   test "should get index" do
@@ -14,65 +13,112 @@ class GroupsControllerTest < ActionController::TestCase
     assert_template "index"
   end
 
-  test "should sort by group ascending as default" do
+  test "should get a list of data at index" do
     get :index
-    assert_response :success
-    assert_template "index"
-    # Check Arrow was set correctly
-    assert_match /#{"&#9650;"}/, @response.body
-    # Check that the Group sort link is selected
-    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=groups&amp;s=asc\">Group<\/a>\s*<\/b>\s*<\/li>/m, @response.body
-    # Fixtures are listed in alphabetical order
-    n = 'name'
-    expected = /#{@grps['one'][n]}.*#{@grps['two'][n]}.*#{@grps['three'][n]}.*#{@grps['four'][n]}.*#{@grps['five'][n]}.*#{@grps['six'][n]}.*#{@grps['seven'][n]}.*#{@grps['eight'][n]}.*#{@grps['nine'][n]}.*#{@grps['ten'][n]}.*/m
-    assert_match expected, @response.body
+    assert_match /<ol>.*<li>.*<\/li>.*<\/ol>/m, @response.body
   end
 
-  test "should sort by group descending" do
-    get :index, :s => 'desc', :by => 'groups'
-    assert_response :success
-    assert_template "index"
-    # Check Arrow was set correctly
-    assert_match /#{"&#9660;"}/, @response.body
-    # Check that the Group sort link is selected
+  test "should set up interface for default display" do
+    get :index
+    assert_equal assigns(:sort_order),  'asc'
+    assert_equal assigns(:order_by),    'groups'
+
+    # Toggle Arrow is Up
+    assert_match /#{"&#9650;"}/, @response.body
+
+    # Groups are selected
     assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=groups&amp;s=asc\">Group<\/a>\s*<\/b>\s*<\/li>/m, @response.body
-    # Fixtures are listed in reverse alphabetical order
-    n = 'name'
-    expected = /#{@grps['twelve'][n]}.*#{@grps['eleven'][n]}.*#{@grps['ten'][n]}.*#{@grps['nine'][n]}.*#{@grps['eight'][n]}.*#{@grps['seven'][n]}.*#{@grps['six'][n]}.*#{@grps['five'][n]}.*#{@grps['four'][n]}.*#{@grps['three'][n]}.*/m
-    assert_match expected, @response.body
+
+    # Add group exists
+    assert_match /<a href.+>Add Group<\/a>/i, @response.body
+  end
+
+  test "should have interface select groups and set arrow up" do
+    get :index, :s => 'asc', :by => 'groups'
+    assert_match /#{"&#9650;"}/, @response.body
+    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=groups&amp;s=asc\">Group<\/a>\s*<\/b>\s*<\/li>/m, @response.body
+  end
+
+  test "should have interface select groups and set arrow down" do
+    get :index, :s => 'desc', :by => 'groups'
+    assert_match /#{"&#9660;"}/, @response.body
+    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=groups&amp;s=asc\">Group<\/a>\s*<\/b>\s*<\/li>/m, @response.body
+  end
+
+  test "should have interface select locations and set arrow up" do
+    get :index, :s => 'asc', :by => 'locations'
+    assert_match /#{"&#9650;"}/, @response.body
+    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=locations&amp;s=asc\">Location<\/a>\s*<\/b>\s*<\/li>/m, @response.body
+  end
+
+  test "should have interface select locations and set arrow down" do
+    get :index, :s => 'desc', :by => 'locations'
+    assert_match /#{"&#9660;"}/, @response.body
+    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=locations&amp;s=asc\">Location<\/a>\s*<\/b>\s*<\/li>/m, @response.body
   end
 
   test "should sort by group ascending" do
     get :index, :s => 'asc', :by => 'groups'
-    assert_response :success
-    assert_template "index"
-    assert_match /#{"&#9650;"}/, @response.body
-    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=groups&amp;s=asc\">Group<\/a>\s*<\/b>\s*<\/li>/m, @response.body
+    groups =  assigns(:groups)
     n = 'name'
-    expected = /#{@grps['one'][n]}.*#{@grps['two'][n]}.*#{@grps['three'][n]}.*#{@grps['four'][n]}.*#{@grps['five'][n]}.*#{@grps['six'][n]}.*#{@grps['seven'][n]}.*#{@grps['eight'][n]}.*#{@grps['nine'][n]}.*#{@grps['ten'][n]}.*/m
-    assert_match expected, @response.body
+    assert_equal groups[0].name, @grps['one']   [n]
+    assert_equal groups[1].name, @grps['two']   [n]
+    assert_equal groups[2].name, @grps['three'] [n]
+    assert_equal groups[3].name, @grps['four']  [n]
+    assert_equal groups[4].name, @grps['five']  [n]
+    assert_equal groups[5].name, @grps['six']   [n]
+    assert_equal groups[6].name, @grps['seven'] [n]
+    assert_equal groups[7].name, @grps['eight'] [n]
+    assert_equal groups[8].name, @grps['nine']  [n]
+    assert_equal groups[9].name, @grps['ten']   [n]
   end
 
-  test "should sort by locations ascending" do
+  test "should sort by group descending" do
+    get :index, :s => 'desc', :by => 'groups'
+    groups =  assigns(:groups)
+    n = 'name'
+    assert_equal groups[0].name, @grps['twelve'][n]
+    assert_equal groups[1].name, @grps['eleven'][n]
+    assert_equal groups[2].name, @grps['ten']   [n]
+    assert_equal groups[3].name, @grps['nine']  [n]
+    assert_equal groups[4].name, @grps['eight'] [n]
+    assert_equal groups[5].name, @grps['seven'] [n]
+    assert_equal groups[6].name, @grps['six']   [n]
+    assert_equal groups[7].name, @grps['five']  [n]
+    assert_equal groups[8].name, @grps['four']  [n]
+    assert_equal groups[9].name, @grps['three'] [n]
+  end
+
+  test "should sort by location ascending" do
     get :index, :s => 'asc', :by => 'locations'
-    assert_response :success
-    assert_template "index"
-    assert_match /#{"&#9650;"}/, @response.body
-    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=locations&amp;s=asc\">Location<\/a>\s*<\/b>\s*<\/li>/m, @response.body
+    groups =  assigns(:groups)
     n = 'name'
-    expected = /#{@grps['eleven'][n]}.*#{@grps['eight'][n]}.*#{@grps['seven'][n]}.*#{@grps['twelve'][n]}.*#{@grps['nine'][n]}.*#{@grps['six'][n]}.*#{@grps['one'][n]}.*#{@grps['ten'][n]}.*#{@grps['two'][n]}.*#{@grps['three'][n]}.*/m
-    assert_match expected, @response.body
+    assert_equal groups[0].name, @grps['eleven'][n]
+    assert_equal groups[1].name, @grps['eight'] [n]
+    assert_equal groups[2].name, @grps['seven'] [n]
+    assert_equal groups[3].name, @grps['twelve'][n]
+    assert_equal groups[4].name, @grps['nine']  [n]
+    assert_equal groups[5].name, @grps['six']   [n]
+    assert_equal groups[6].name, @grps['one']   [n]
+    assert_equal groups[7].name, @grps['ten']   [n]
+    assert_equal groups[8].name, @grps['two']   [n]
+    assert_equal groups[9].name, @grps['three'] [n]
   end
 
-  test "should sort by locations descending" do
+  test "should sort by location descending" do
     get :index, :s => 'desc', :by => 'locations'
-    assert_response :success
-    assert_template "index"
-    assert_match /#{"&#9660;"}/, @response.body
-    assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=locations&amp;s=asc\">Location<\/a>\s*<\/b>\s*<\/li>/m, @response.body
+    groups =  assigns(:groups)
     n = 'name'
-    expected = /#{@grps['five'][n]}.*#{@grps['four'][n]}.*#{@grps['three'][n]}.*#{@grps['two'][n]}.*#{@grps['one'][n]}.*#{@grps['ten'][n]}.*#{@grps['eleven'][n]}.*#{@grps['eight'][n]}.*#{@grps['seven'][n]}.*#{@grps['twelve'][n]}.*/m
-    assert_match expected, @response.body
+    assert_equal groups[0].name, @grps['five']  [n]
+    assert_equal groups[1].name, @grps['four']  [n]
+    assert_equal groups[2].name, @grps['three'] [n]
+    assert_equal groups[3].name, @grps['two']   [n]
+    assert_equal groups[4].name, @grps['one']   [n]
+    assert_equal groups[5].name, @grps['ten']   [n]
+    assert_equal groups[6].name, @grps['eleven'][n]
+    assert_equal groups[7].name, @grps['eight'] [n]
+    assert_equal groups[8].name, @grps['seven'] [n]
+    assert_equal groups[9].name, @grps['twelve'][n]
   end
 
 end

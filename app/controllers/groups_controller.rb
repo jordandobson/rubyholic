@@ -8,14 +8,6 @@ class GroupsController < ApplicationController
                           :order => @group_list,
                           :limit => 10
 
-#     @groups = Group.find  :all, 
-#                           :include => :locations,
-#                           :order => @group_list,
-#                           :conditions => {
-#                             :name => not_nil
-#                           },
-#                           :limit => 10
-
     respond_to do |format|
       format.html
     end
