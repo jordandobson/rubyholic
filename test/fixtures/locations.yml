@@ -32,3 +32,10 @@ five:
   lat: 1.5
   lng: 1.5
   note: MyText
+
+six:
+  name: A Loc
+  address: MyText
+  lat: 1.5
+  lng: 1.5
+  note: MyText

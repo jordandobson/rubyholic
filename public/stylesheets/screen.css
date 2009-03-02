@@ -216,6 +216,17 @@ div#pgHome ol li a{
   background-position: 95% 50%;
   background-repeat: no-repeat;
 }
+div#pgHome ol li a em{
+  font-size: 50%;
+  color: #bbb;
+  display: block;
+  margin-top: .25em;
+}
+div#pgHome ol li a em b{
+  text-transform: Uppercase;
+  margin-right: .5em;
+  color: #999;
+}
 div#pgHome ol li a:hover{
   background-color: #ddd;
 }
@@ -246,6 +257,7 @@ div#pgHome ul li a{
   word-spacing: 3px;
   letter-spacing: 1px;
 }
+
 div#pgHome ul li input{
   float: left;
   width: 60px;

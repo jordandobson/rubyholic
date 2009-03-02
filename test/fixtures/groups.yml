@@ -1,27 +1,27 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: Atlanta
+  name: One
   description: 
   url: 
 
 two:
-  name: Boise Ruby Group
+  name: Two
   description: 
   url: 
 
 three:
-  name: Chicago.rb
+  name: Three
   description: 
   url: 
 
 four:
-  name: Indianapolis Ruby Squad
+  name: Four
   description: 
   url: 
 
 five:
-  name: South Chicago Ruby Group
+  name: Five
   description: 
   url: 
 

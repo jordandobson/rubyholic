@@ -1,6 +1,7 @@
 one:
   group: one
   location: one
+  name: event one
   start_date: 2009-02-24 23:44:51
   end_date: 2009-02-24 23:44:51
   description: MyText
@@ -8,6 +9,7 @@ one:
 two:
   group: two
   location: two
+  name: event two
   start_date: 2009-02-25 23:44:51
   end_date: 2009-02-25 23:44:51
   description: MyText
@@ -15,6 +17,7 @@ two:
 three:
   group: three
   location: three
+  name: event three
   start_date: 2009-02-26 23:44:51
   end_date: 2009-02-26 23:44:51
   description: MyText
@@ -22,6 +25,7 @@ three:
 four:
   group: four
   location: four
+  name: Event Three
   start_date: 2009-02-28 23:44:51
   end_date: 2009-02-28 23:44:51
   description: MyText
@@ -29,6 +33,15 @@ four:
 five:
   group: five
   location: five
+  name: Event 5
+  start_date: 2009-02-27 23:44:51
+  end_date: 2009-02-27 23:44:51
+  description: MyText
+
+six:
+  group: ten
+  location: six
+  name: Event 5
   start_date: 2009-02-27 23:44:51
   end_date: 2009-02-27 23:44:51
   description: MyText

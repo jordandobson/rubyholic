@@ -11,7 +11,7 @@
 <div id="pgHome">
   <hr size="1" />
   <div id="head">
-    <h2><!--Ruby Groups - --><%= @sort_order %> - <%= @order_by %></h2>
+    <h2>Active Groups</h2>
     <menu>
       <li><strong>Sort by</strong></li>
       <li>
@@ -31,7 +31,18 @@
   </div>
   <ol>
   <% for group in @groups -%>
-    <li><%= group.location.name %><%= link_to group.name, group, :title => group.description %></li>
+      <% if group.locations.length == 0 -%>
+      <% link_text = "#{group.name} <em>No Meetings Scheduled</em>"  -%>
+        <li>
+          <%= link_to link_text, :controller => 'groups', :action => 'index', :title => group.description %>
+        </li>
+      <% end -%>
+      <% group.locations.each do |location| -%>
+         <% link_text = "#{group.name} <em><b>Meet At</b> #{location.name}</em>"  -%>
+        <li>
+          <%= link_to link_text, :controller => 'groups', :action => 'index', :title => group.description %>
+        </li>
+      <% end -%>
   <% end -%>
   </ol>
   <hr size="1" />
