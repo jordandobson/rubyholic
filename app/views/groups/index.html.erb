@@ -7,7 +7,7 @@
     toggle_arrow = "&#9650;"
     toggle_sort = "desc"
   end
-%>
+-%>
 <div id="pgHome">
   <hr size="1" />
   <div id="head">
@@ -47,7 +47,7 @@
   </ol>
   <hr size="1" />
   <ul>
-    <li><%= link_to 'Add Group', new_group_path %></li>
+    <li><%= link_to 'Add Group', :controller => 'groups', :action => 'index' %></li>
     <li><input disabled="disabled" type="button" value="Back" /></li>
     <li><input disabled="disabled" type="button" value="Next" /></li>
   </ul>
