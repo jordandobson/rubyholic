@@ -12,6 +12,7 @@ class GroupsController < ApplicationController
                           :include => :location,
                           :select => 'id, name, description',
                           :order => @group_list
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @groups }

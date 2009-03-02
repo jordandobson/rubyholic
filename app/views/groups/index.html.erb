@@ -1,9 +1,6 @@
 <% 
-  # sort      = %w[asc desc].include?(@sort_order.downcase) ? @sort_order.downcase : 'desc'
-  current_sort = @sort_order
-
   # Change Arrow and Toggle
-  if current_sort == "desc"
+  if @sort_order == "desc"
     toggle_arrow = "&#9660;"
     toggle_sort = "asc"
   else
@@ -33,7 +30,6 @@
     </menu>
   </div>
   <ol>
-  <%= @groups.inspect %>
   <% for group in @groups -%>
     <li><%= group.location.name %><%= link_to group.name, group, :title => group.description %></li>
   <% end -%>
