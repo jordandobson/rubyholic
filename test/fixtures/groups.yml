@@ -1,61 +1,61 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: One
+  name: A One
   description: 
   url: 
 
 two:
-  name: Two
+  name: B Two
   description: 
   url: 
 
 three:
-  name: Three
+  name: C Three
   description: 
   url: 
 
 four:
-  name: Four
+  name: D Four
   description: 
   url: 
 
 five:
-  name: Five
+  name: E Five
   description: 
   url: 
 
 six:
-  name: LA Ruby Group
+  name: F LA Ruby Group
   description: 
   url: 
 
 seven:
-  name: Madison, WI Ruby Group 
+  name: G Madison Ruby Group 
   description: 
   url: 
 
 eight:
-  name: Miami
+  name: H Miami
   description: 
   url:
  
 nine:
-  name: Pirate Ruby Group
+  name: I Pirate Ruby Group
   description: 
   url: 
 
 ten:
-  name: Ruby Trailblazers
+  name: J Ruby Trailblazers
   description: 
   url: 
 
 eleven:
-  name: Eastern Washington Ruby Group
+  name: K Eastern Washington Ruby Group
   description: 
   url: 
 
 twelve:
-  name: Seattle.rb
+  name: L Seattle.rb
   description: 
   url: 
