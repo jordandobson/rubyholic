@@ -1,21 +1,41 @@
-<% if @sort_order =~ /asc/i 
-  direction = 'Sort &#9650;'
-  order = 'DESC'
-else
-  direction = 'Sort &#9660;'
-  order = 'ASC'
-end -%>
+<% 
+  # sort      = %w[asc desc].include?(@sort_order.downcase) ? @sort_order.downcase : 'desc'
+  current_sort = @sort_order
+
+  # Change Arrow and Toggle
+  if current_sort == "desc"
+    toggle_arrow = "&#9660;"
+    toggle_sort = "asc"
+  else
+    toggle_arrow = "&#9650;"
+    toggle_sort = "desc"
+  end
+%>
 <div id="pgHome">
   <hr size="1" />
   <div id="head">
-    <h2>Ruby Groups</h2>
+    <h2><!--Ruby Groups - --><%= @sort_order %> - <%= @order_by %></h2>
     <menu>
-      <li><%= link_to direction, :controller => 'groups', :action => "index", :order => order %></li>
+      <li><strong>Sort by</strong></li>
+      <li>
+        <%= link_to toggle_arrow, :controller => 'groups', :action => "index", :s => toggle_sort, :by => @order_by %>
+      </li>
+      <li>
+        <% if @order_by == 'locations' -%><b><% end -%>
+        <%= link_to "Location",    :controller => 'groups', :action => "index", :s => 'asc',      :by => "locations" %>
+        <% if @order_by == 'locations' -%></b><% end -%>
+      </li>
+      <li>
+        <% if @order_by == 'groups' -%><b><% end -%>
+        <%= link_to "Group",       :controller => 'groups', :action => "index", :s => 'asc',      :by => "groups" %>
+        <% if @order_by == 'groups' -%></b><% end -%>
+      </li>
     </menu>
   </div>
   <ol>
+  <%= @groups.inspect %>
   <% for group in @groups -%>
-    <li><%= link_to group.title, group, :title => group.description %></li>
+    <li><%= group.location.name %><%= link_to group.name, group, :title => group.description %></li>
   <% end -%>
   </ol>
   <hr size="1" />

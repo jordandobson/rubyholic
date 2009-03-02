@@ -127,7 +127,7 @@ h2{
   font-family: "Arial Black", arial, sans-serif;
   font-weight: bold;
   text-transform: Uppercase;
-  letter-spacing: .05em;
+
   text-shadow: 1px 1px 1px #999;
   line-height: 1em;
   height: 1em;
@@ -148,10 +148,21 @@ div#pgHome menu{
   top: 10px;
   right: 20px;
   z-index: 10;
+  width: 50%;
+  xborder: 1px solid red;
+  text-align: right;
 }
 div#pgHome menu li{
   display: inline;
 }
+div#pgHome menu li strong{
+  display: inline;
+  font-size: 50%;
+  line-height: 2em;
+  text-transform: Uppercase;
+  color: #fff;
+}
+
 div#pgHome menu li a,
 div#pgHome ul li a{
   display: block;
@@ -164,8 +175,9 @@ div#pgHome ul li a{
   -webkit-border-radius: 10px;
   -webkit-box-shadow: 1px 1px 1px #1e6873;
   font-weight: bold;
-  word-spacing: 10px;
+  word-spacing: 5px;
   letter-spacing: 1px;
+  margin-left: 1em;
 }
 div#pgHome menu li a:hover,
 div#pgHome ul li a:hover{
@@ -181,6 +193,14 @@ div#pgHome menu li a:active,
 div#pgHome ul li a:active{
   -webkit-box-shadow: 1px 1px 1px #2d9cac;
   background-color: #1e6873;
+}
+div#pgHome menu li b a,
+div#pgHome menu li b a:hover,
+div#pgHome menu li b a:active{
+  -webkit-box-shadow: 1px 1px 1px #2d9cac;
+  background-color: #1e6873;
+  cursor: default;
+  color: #fff;
 }
 div#pgHome ol{
   text-align: left;

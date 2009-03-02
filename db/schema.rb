@@ -9,19 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090301021120) do
+ActiveRecord::Schema.define(:version => 20090301235313) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
+    t.integer  "location_id"
   end
 
   create_table "groups", :force => true do |t|
-    t.string   "title"
+    t.string   "name"
     t.text     "description"
     t.string   "url"
     t.datetime "created_at"
@@ -29,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20090301021120) do
   end
 
   create_table "locations", :force => true do |t|
-    t.string   "venue"
+    t.string   "name"
     t.text     "address"
     t.float    "lat"
     t.float    "lng"

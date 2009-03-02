@@ -1,14 +1,33 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  venue: MyString
+  name: A Loc
   address: MyText
   lat: 1.5
   lng: 1.5
   note: MyText
 
 two:
-  venue: MyString
+  name: B Loc
+  address: MyText
+  lat: 1.5
+  lng: 1.5
+  note: MyText
+
+three:
+  name: C Loc
+  address: MyText
+  lat: 1.5
+  lng: 1.5
+  note: MyText
+
+four:
+  name: D Loc
+  address: MyText
+  lat: 1.5
+  lng: 1.5
+  note: MyText
+
+five:
+  name: E Loc
   address: MyText
   lat: 1.5
   lng: 1.5

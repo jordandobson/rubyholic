@@ -1,11 +1,17 @@
 class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
+#     @groups = Group.find( :all,
+#                           :include => :locations,
+#                           :order => @group_list,
+#                           :limit => 10)
+
   def index
     get_sort_order
-    @groups = Group.find( :all, 
-                          :order => @sort_order, 
-                          :limit => 10)
+    @groups = Group.find  :all, 
+                          :include => :location,
+                          :select => 'id, name, description',
+                          :order => @group_list
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @groups }
@@ -16,10 +22,23 @@ class GroupsController < ApplicationController
   # GET /groups/1.xml
   def show
     @group = Group.find(params[:id])
-
+    rescue ActiveRecord::RecordNotFound
+      logger.error("Attempt to access invalid group #{params[:id]}")
+      redirect_to_index('Invalid group')
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @group }
+    end
+  end
+
+  def show
+    begin
+      @group = Group.find(params[:id])
+    else
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @group }
+      end
     end
   end
 
@@ -88,12 +107,14 @@ class GroupsController < ApplicationController
 private
 
   def get_sort_order
-    if params[:order] == 'ASC' || params[:order] == 'DESC'
-      dir = params[:order]
-    else
-      dir = 'ASC'
-    end
-    @sort_order = 'upper(title) '+ dir 
+    @sort_order = %w{ desc asc }.include?(params[:s]) ? params[:s].downcase : 'asc'
+    @order_by   = 'groups'
+    @group_list = "upper(name) #{@sort_order}"
+  end
+
+  def redirect_to_index message = nil
+    flash[:notice] = message if message
+    redirect_to :action => :index
   end
 
 end
