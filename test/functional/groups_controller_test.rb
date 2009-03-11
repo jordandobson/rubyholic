@@ -2,10 +2,8 @@ require 'test_helper'
 
 class GroupsControllerTest < ActionController::TestCase
 
-  def setup
-    @grps = YAML.load_file("#{RAILS_ROOT}/test/fixtures/groups.yml")
-  end
-
+  fixtures :groups
+ 
   test "should get index" do
     get :index
     assert_response :success
@@ -57,60 +55,168 @@ class GroupsControllerTest < ActionController::TestCase
     assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=locations&amp;s=asc\">Location<\/a>\s*<\/b>\s*<\/li>/m, @response.body
   end
 
-  test "should sort by group ascending" do
+  test "should sort by group name ascending" do
     get :index, :s => 'asc', :by => 'groups'
-    groups =  assigns(:groups)
-    n = 'name'
-    assert_equal groups[0].name, @grps['one']   [n]
-    assert_equal groups[1].name, @grps['two']   [n]
-    assert_equal groups[2].name, @grps['three'] [n]
-    assert_equal groups[3].name, @grps['four']  [n]
-    assert_equal groups[4].name, @grps['five']  [n]
-    assert_equal groups[5].name, @grps['six']   [n]
-    assert_equal groups[6].name, @grps['seven'] [n]
-    assert_equal groups[7].name, @grps['eight'] [n]
-    assert_equal groups[8].name, @grps['nine']  [n]
-    assert_equal groups[9].name, @grps['ten']   [n]
+    grps =  assigns(:groups)
+    assert_equal grps[0].name, groups('two').name
+    assert_equal grps[1].name, groups('three').name
+    assert_equal grps[2].name, groups('four').name
+    assert_equal grps[3].name, groups('five').name
+    assert_equal grps[4].name, groups('six').name
+    assert_equal grps[5].name, groups('seven').name
+    assert_equal grps[6].name, groups('eight').name
+    assert_equal grps[7].name, groups('nine').name
+    assert_equal grps[8].name, groups('ten').name
+    assert_equal grps[9].name, groups('eleven').name
   end
 
   test "should sort by group descending" do
     get :index, :s => 'desc', :by => 'groups'
-    groups =  assigns(:groups)
-    n = 'name'
-    assert_equal groups[0].name, @grps['twelve'][n]
-    assert_equal groups[1].name, @grps['eleven'][n]
-    assert_equal groups[2].name, @grps['ten']   [n]
-    assert_equal groups[3].name, @grps['nine']  [n]
-    assert_equal groups[4].name, @grps['eight'] [n]
-    assert_equal groups[5].name, @grps['seven'] [n]
-    assert_equal groups[6].name, @grps['six']   [n]
-    assert_equal groups[7].name, @grps['five']  [n]
-    assert_equal groups[8].name, @grps['four']  [n]
-    assert_equal groups[9].name, @grps['three'] [n]
+    grps =  assigns(:groups)
+    assert_equal grps[0].name, groups('one').name
+    assert_equal grps[1].name, groups('twelve').name
+    assert_equal grps[2].name, groups('eleven').name
+    assert_equal grps[3].name, groups('ten').name
+    assert_equal grps[4].name, groups('nine').name
+    assert_equal grps[5].name, groups('eight').name
+    assert_equal grps[6].name, groups('seven').name
+    assert_equal grps[7].name, groups('six').name
+    assert_equal grps[8].name, groups('five').name
+    assert_equal grps[9].name, groups('four').name
   end
 
   test "should sort by location ascending" do
     get :index, :s => 'asc', :by => 'locations'
-    groups =  assigns(:groups)
-    n = 'name'
-    assert_equal groups[0].name, @grps['one']   [n]
-    assert_equal groups[1].name, @grps['ten']   [n]
-    assert_equal groups[2].name, @grps['two']   [n]
-    assert_equal groups[3].name, @grps['three'] [n]
-    assert_equal groups[4].name, @grps['four']  [n]
-    assert_equal groups[5].name, @grps['five']  [n]
+    grps =  assigns(:groups)
+    assert_equal grps[0].name, groups('ten').name
+    assert_equal grps[1].name, groups('three').name
+    assert_equal grps[2].name, groups('four').name
+    assert_equal grps[3].name, groups('five').name
+    assert_equal grps[4].name, groups('one').name
   end
 
   test "should sort by location descending" do
     get :index, :s => 'desc', :by => 'locations'
-    groups =  assigns(:groups)
-    n = 'name'
-    assert_equal groups[0].name, @grps['five']  [n]
-    assert_equal groups[1].name, @grps['four']  [n]
-    assert_equal groups[2].name, @grps['three'] [n]
-    assert_equal groups[3].name, @grps['two']   [n]
-    assert_equal groups[4].name, @grps['one']   [n]
-    assert_equal groups[5].name, @grps['ten']   [n]
+    grps =  assigns(:groups)
+    assert_equal grps[0].name, groups('one').name
+    assert_equal grps[1].name, groups('five').name
+    assert_equal grps[2].name, groups('four').name
+    assert_equal grps[3].name, groups('three').name
+    assert_equal grps[4].name, groups('ten').name
+  end
+
+  test "should get new" do
+    get :new
+    assert_response :success
+    assert_template 'groups/new'
+  end
+
+  test "should get new with nessecary inputs" do
+    get :new
+    assert_tag :tag => 'input', :attributes => {
+      :name => 'group[name]'
+    }
+    assert_tag :tag => 'input', :attributes => {
+      :name => 'group[url]'
+    }
+    assert_tag :tag => 'textarea', :attributes => {
+      :name => 'group[description]'
+    }
+    assert_tag :tag => 'input', :attributes => {
+      :name => 'commit', :type => 'submit'
+    }
+  end
+
+  test "should have a cancel link" do
+    get :new
+    assert_match /<a.*href.*\/groups.*>cancel<\/a>/i, @response.body
+  end
+
+  test "should have http in url field" do
+    get :new
+    assert_tag :tag => 'input', :attributes => {
+      :name => 'group[url]', :value => 'http://'
+    }
+  end
+
+  test "should create group without url and description" do
+    assert_difference('Group.count') do
+      post :create, :group => {
+        :name => 'Pop'
+      }
+    end
+    grp =  assigns(:group) 
+    assert_response :redirect
+    assert_redirected_to :controller => "groups", :action => grp.id
+  end
+
+  test "should create group with url and description" do
+    assert_difference('Group.count') do
+      post :create, :group => {
+        :name         => 'Pop', 
+        :url          => 'http://pop.com',
+        :description  => 'Seattle Pop Group'
+      }
+    end
+    grp =  assigns(:group)
+    assert_redirected_to :controller => "groups", :action => grp.id
+  end
+
+  test "should error on duplicate group name" do
+    expected = Group.count
+    post :create, :group => {
+      :name => groups(:one).name
+    }
+    assert_template 'groups/new'
+    assert_equal expected, Group.count
+    assert_tag :tag => 'div', :attributes => {
+      :id => 'errorExplanation'
+    }
+    assert "div.fieldWithErrors input[name*=group[name]]"
+  end
+
+  test "should error on missing group name" do
+    expected = Group.count
+    post :create, :group => {
+      :name => ''
+    }
+    assert_template 'groups/new'
+    assert_equal expected, Group.count
+    assert_tag :tag => 'div', :attributes => {
+      :id => 'errorExplanation'
+    }
+    assert "div.fieldWithErrors input[name*=group[name]]"
+  end
+
+  test "should not include http in url if left blank" do
+    assert_difference('Group.count') do
+      post :create, :group => {
+        :name => 'Pop',
+        :url  => 'http://'
+      }
+    end
+    grp = assigns(:group) 
+    assert_response :redirect
+    assert_redirected_to :controller => "groups", :action => grp.id
+    assert_nil grp.url
+  end
+
+  test "should get edit" do
+    get :edit, :id => groups(:one).id
+    assert_tag :tag => 'input', :attributes => {
+      :name   => 'group[name]', 
+      :type   => 'text',
+      :value  => groups(:one).name
+    }
+    assert_tag :tag => 'input', :attributes => {
+      :name   => 'group[url]', 
+      :type   => 'text',
+      :value  =>  groups(:one).url
+    }
+    assert_tag :tag => 'textarea', :content  => groups(:one).description, :attributes => {
+      :name   => 'group[description]'
+    }
+    assert_response :success
   end
 
 end

@@ -21,4 +21,22 @@ class GroupTest < ActiveSupport::TestCase
     assert_not_equal count, Group.count
   end
 
+  test "can access location name via group" do
+    grp = Group.find(groups(:one).id, :include => :locations)
+    assert grp.locations[0].name
+    assert_equal grp.locations[0].name, "A Loc"
+    # group.locations.length == 0
+    # one that isn't linked up is has no location
+  end
+
+  test "can access location via groups" do
+    grp = Group.find(:all, :include => :locations)
+    assert grp[0].locations.length > 0
+  end
+
+#   test "can't access location via invalid group" do
+#     grp = Group.find(9999999, :include => :locations)
+#     assert_raise grp.locations[0].name
+#   end
+
 end

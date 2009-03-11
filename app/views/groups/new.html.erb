@@ -1,23 +1,35 @@
-<h1>New group</h1>
+<div id="groupForm" class="add">
+  <hr size="1" />
+  <div id="head">
+    <h2>Add A Group</h2>
+    <menu>
+      <li><%= link_to "Cancel", groups_path %></li>
+    </menu>
+  </div>
 
-<% form_for(@group) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
-
-<%= link_to 'Back', groups_path %>
+  <% form_for(@group) do |f| -%>
+  <div id="body" class="new">
+      <div id="error"><%= f.error_messages -%></div>
+      <div>
+        <%= f.label :name, "Group Name" %>
+        <br />
+        <%= f.text_field :name %>
+      </div>
+      <div>
+        <%= f.label :url, "Group Site" %>
+        <br />
+        <%= f.text_field :url, :value => "http://" %>
+      </div>
+      <div class="desc">
+        <%= f.label :description, "Tell us about the group" %>
+        <br />
+        <%= f.text_area :description %>
+      </div>
+      <div style="clear:both;"></div>
+  </div>
+  <hr size="1" />
+  <ul>
+    <li><%= f.submit "✚ Add Group" %></li>
+  </ul>
+    <% end -%>
+</div>

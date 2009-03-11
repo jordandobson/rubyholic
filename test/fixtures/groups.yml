@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: A One
-  description: 
-  url: 
+  name: Seattle.rb
+  description: Every Tuesday from 7:00PM to 9:00 PM.
+  url: http://SeattleRB.org
 
 two:
   name: B Two

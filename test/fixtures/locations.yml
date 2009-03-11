@@ -1,9 +1,9 @@
 one:
-  name: A Loc
-  address: MyText
+  name: Vivace Cafe
+  address: 550 East Broadway, Seattle, WA, 98102
   lat: 1.5
   lng: 1.5
-  note: MyText
+  note: We meet in the back room.
 
 two:
   name: B Loc

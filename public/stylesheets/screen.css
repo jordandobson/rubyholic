@@ -127,12 +127,21 @@ h2{
   font-family: "Arial Black", arial, sans-serif;
   font-weight: bold;
   text-transform: Uppercase;
-
   text-shadow: 1px 1px 1px #999;
   line-height: 1em;
   height: 1em;
 }
-div#pgHome{
+h2 span{
+  width: 80%;
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+
+div#pgHome,
+div#groupForm,
+div#groupShow{
   border: 1px solid #333;
   border-top: none;
   -moz-border-radius-bottomleft: 20px;
@@ -142,17 +151,20 @@ div#pgHome{
   -webkit-border-bottom-left-radius: 20px;
   position: relative;
 }
-div#pgHome menu{
+div#pgHome menu,
+div#groupForm menu,
+div#groupShow menu{
   height: 1em;
   position: absolute;
   top: 10px;
   right: 20px;
   z-index: 10;
   width: 50%;
-  xborder: 1px solid red;
   text-align: right;
 }
-div#pgHome menu li{
+div#pgHome menu li,
+div#groupForm menu li,
+div#groupShow menu li{
   display: inline;
 }
 div#pgHome menu li strong{
@@ -164,7 +176,9 @@ div#pgHome menu li strong{
 }
 
 div#pgHome menu li a,
-div#pgHome ul li a{
+div#pgHome ul li a,
+div#groupForm menu li a,
+div#groupShow menu li a{
   display: block;
   float: right;
   background-color: #fff;
@@ -180,7 +194,10 @@ div#pgHome ul li a{
   margin-left: 1em;
 }
 div#pgHome menu li a:hover,
-div#pgHome ul li a:hover{
+div#pgHome ul li a:hover,
+div#groupForm menu li a:hover,
+div#groupShow menu li a:hover,
+div#groupShow ul li a:hover{
   background-color: #000;
   font-size: .5em;
   text-transform: Uppercase;
@@ -190,7 +207,11 @@ div#pgHome ul li a:hover{
   color: #fff;
 }
 div#pgHome menu li a:active,
-div#pgHome ul li a:active{
+div#pgHome ul li a:active,
+div#groupForm menu li a:active,
+div#groupForm ul li a:active,
+div#groupShow menu li a:active,
+div#groupShow ul li a:active{
   -webkit-box-shadow: 1px 1px 1px #2d9cac;
   background-color: #1e6873;
 }
@@ -202,12 +223,16 @@ div#pgHome menu li b a:active{
   cursor: default;
   color: #fff;
 }
-div#pgHome ol{
+div#pgHome ol,
+div#groupForm ol,
+div#groupShow ol{
   text-align: left;
   background-color: #fff;
 }
 div#pgHome ol li{}
-div#pgHome ol li a{
+div#pgHome ol li a,
+div#groupForm ol li a,
+div#groupShow ol li a{
   display: block;
   padding: 9px 30px 10px 30px;
   font-size: 150%;
@@ -237,7 +262,9 @@ div#pgHome ol li a:hover em,
 div#pgHome ol li a:hover em b{
   color: #666;
 }
-div#pgHome ul{
+div#pgHome ul,
+div#groupForm ul,
+div#groupShow ul{
   padding: 10px 20px 10px 20px;
   height: 1em;
   background-color: #3cd0e6;
@@ -247,10 +274,14 @@ div#pgHome ul{
   -webkit-border-bottom-right-radius: 20px;
   -webkit-border-bottom-left-radius: 20px;
 }
-div#pgHome ul li{
+div#pgHome ul li,
+div#groupForm ul li,
+div#groupShow ul li{
   display: inline;
 }
-div#pgHome ul li a{
+div#pgHome ul li a,
+div#groupForm ul li a,
+div#groupShow ul li a{
   display: block;
   float: right;
   background-color: #fff;
@@ -265,9 +296,280 @@ div#pgHome ul li a{
   letter-spacing: 1px;
 }
 
-div#pgHome ul li input{
+div#pgHome ul li input,
+div#groupForm ul li input{
   float: left;
   width: 60px;
   margin-right: 20px;
 }
+/* SHOW PAGE */
+div#groupShow{
+  text-align : left;
+  background-color: #fff;
+  overflow: hidden;
+}
+div#groupShow div#body{
+  padding: 20px 20px;
+}
+div#groupShow p{
+  font-size: .75em;
+  color: #111;
+  line-height: 1.5em;
+  margin-bottom: 1.5em;
+  font-family: Georgia;
+}
+div#groupShow p em{
+  background-color: #eee;
+  color: #333;
+  padding: 0 10px;
+  font-weight: bold;
+  -webkit-border-radius: 4px;
+  font-size: .75em;
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 5px;
+  width: 3.25em;
+  text-align: center;
+}
+div#groupShow p a:after{
+  content: "➚";
+  padding: 0 .25em;
+  margin: 0 .5em;
+  display: inline;
+  line-height: bottom;
+  color: #fff;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  -webkit-border-radius: .625em;
+  font-size: .75em;
+}
+div#groupShow p a:hover:after{
+  background-color: #c32f19;
+  border: 1px solid #c32f19;
+}
 
+div#groupShow h3{
+  font-size: .75em;
+  color: #111;
+  margin-bottom: 1em;
+  background-color: #eee;
+  background-color: #3CD0E6;
+  margin: 0px 0px 10px 0px;
+  padding: 0px 10px;
+  -webkit-border-radius: 4px;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: bold;
+  color: #fff;
+  display: block;
+  
+}
+div#groupShow h3 span{
+  line-height: 2em;
+}
+div#groupShow h3 span small{
+  text-transform: Uppercase;
+  font-size: .75em;
+  margin: 0 .5em 0 0;
+  color: #9EE8F3;
+  vertical-align: baseline;
+  line-height: 1em;
+}
+div#groupShow h3 span i{
+  font-style: normal;
+  margin-right: 0px;
+  text-transform: Uppercase;
+  float: right;
+}
+div#groupShow h3 span b{
+  text-transform: Uppercase;
+  word-spacing: 2px;
+  letter-spacing: 1px;
+}
+div#groupShow p u,
+div#groupShow p span{
+  font-size: .75em;
+  display: block;
+  text-decoration: none;
+  color: #666;
+  font-family: helvetica, arial, sans-serif;
+  margin-left: 4em;
+  padding-left: 20px;
+  line-height: 1.5em;
+}
+div#groupShow p.title{
+  margin-bottom: 10px;
+  font-family: helvetica, arial, sans-serif;
+  padding-left: 0px;
+}
+div#groupShow p.time{
+  margin-top: 0em;
+  font-family: Georgia;
+}
+div#groupShow p.time strong{
+  color: #666;
+}
+div#groupShow div.img{
+  float: right;
+  width: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+  border: 1px solid #999;
+  margin-right: 10px;
+}
+div#groupShow div.img img{
+  float: none;
+}
+
+div#groupShow p.at b{
+  color: #000;
+  font-weight: normal;
+}
+div#groupShow p.title b{
+  color: #000;
+}
+div.event p{
+  margin-left: 10px;
+}
+/* NEW PAGE */
+div#groupForm{
+  text-align : left;
+  background-color: #fff;
+  overflow: hidden;
+}
+div#groupForm label{
+  float: left;
+  width: 19.25%;
+  display: block;
+  text-align: right;
+  padding-top: .55em;
+  line-height: 1em;
+  border-top: 2px solid #fff;
+  color: #3cd0e6;
+}
+div#groupForm div input,
+div#groupForm div textarea{
+  width: 74%;
+  padding: .5em;
+  margin: 0;
+  font-size: 1em;
+  float: right;
+  margin-bottom: 20px;
+  -webkit-border-radius: 10px;
+  border: 1px solid #ddd;
+  color: #999999;
+  background-color: #eee;
+}
+div#groupForm div input{
+  padding: .5em;
+}
+div#groupForm div textarea{
+  height: 10em;
+  padding: .5em;
+  font-size: 1em;
+  font-family: Georgia;
+}
+div#groupForm div input:hover,
+div#groupForm div textarea:hover{
+  border: 1px solid #aaa;
+  color: #555;
+}
+div#groupForm div label:before{
+  display: block;
+}
+div#groupForm div input:focus,
+div#groupForm div textarea:focus{
+  background-color: #fdfdaa;
+  color: #000000;
+  border-color: #fff;
+  border: 1px solid #666 !important;
+}
+div#groupForm div input:active,
+div#groupForm div textarea:active{
+  background-color: #F6F6CC !important;
+}
+div#groupForm div#body{
+  padding: 20px 20px 0px 20px;
+}
+div#groupForm div#body div{
+  clear: both;
+}
+div#groupForm div#body div.fieldWithErrors{
+  clear: none;
+}
+div#groupForm ul li input{
+  width: 19.25%;
+  display: block;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: Uppercase;
+  letter-spacing:.125em;
+  word-spacing: .35em;
+  text-indent: .25em;
+  text-align: left;
+  color: #000;
+  text-shadow: 1px 1px 2px #aaa;
+}
+
+div#groupForm.edit ul li input{
+  text-indent: .05em;
+  word-spacing: .25em;
+}
+div#groupForm ul li input:hover,
+div#groupForm ul li input:focus{
+  text-shadow: 0px 0px 2px #333;
+}
+                                                              /* ERRORS */
+div#error{
+  -webkit-box-shadow: 0px 2px 5px #ddd;
+  margin: -20px -20px 20px -20px;
+}
+div#error *{
+  display: inline;
+  line-height: 1em;
+  font-family: inherit;
+  margin: 0;
+  padding: 0;
+}
+div#error p{
+  display: none;
+}
+div#error h2{
+  display: block;
+  background-color: red;
+  padding: 10px 20px;
+  text-align: left;
+  text-shadow: 0px 0px 0px red;
+}
+div#error h2:before{
+  content: "⚠ ";
+  font-weight: bold;
+  text-shadow: 0px 0px 0px red;
+  font-size: 1.5em;
+  line-height: .5em;
+  vertical-align: middle;
+  margin-top: .05em;
+  display: inline-block;
+  margin-right: .125em;
+  color: #000;
+}
+div#error ul{
+  background-color: transparent;
+  -webkit-border-radius: 0px;
+  display: block;
+  background-color: pink;
+  position: relative;
+  height: auto;
+  padding: 0px;
+}
+div#error ul li{
+  padding: .75em 20px;
+  font-size: .75em;
+  border-bottom: 1px solid red;
+  display: block;
+  background-color: pink;
+  color: #000;
+  font-weight: bold;
+}
+div.fieldWithErrors label{
+  color: red !important;
+}

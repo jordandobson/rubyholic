@@ -1,18 +1,18 @@
 one:
   group: one
   location: one
-  name: event one
-  start_date: 2009-02-24 23:44:51
-  end_date: 2009-02-24 23:44:51
-  description: MyText
+  name: Hack Night!
+  start_date: 2009-02-24 19:00:00
+  end_date: 2009-02-24 21:00:00
+  description: Everyone is Welcome!
  
 two:
-  group: two
-  location: two
-  name: event two
+  group: one
+  location: one
+  name: Hack Night
   start_date: 2009-02-25 23:44:51
   end_date: 2009-02-25 23:44:51
-  description: MyText
+  description: Everyone is Welcome!
   
 three:
   group: three

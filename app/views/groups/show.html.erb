@@ -1,18 +1,54 @@
-<p>
-  <b>Title:</b>
-  <%=h @group.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @group.description %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%=h @group.url %>
-</p>
-
-
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<div id="groupShow">
+  <hr size="1" />
+  <div id="head">
+    <h2><span><%=h @group.name %></span></h2>
+    <menu>
+      <li><%= link_to 'Edit Group', edit_group_path(@group) %></li>
+    </menu>
+  </div>
+  <div id="body">
+    <% if @group.description != "" && @group.description != nil -%>
+    <p><em>INFO</em> <%= @group.description.gsub(/\n.*\n/, "</p><p>") %></p>
+    <% end -%>
+    <% if @group.url != "" && @group.url != nil -%>
+    <p>
+      <em>SITE</em>
+      <%= link_to @group.url, @group.url, :target => "_blank" %>
+    </p>
+    <% end -%>
+    <% for event in @group.events %>
+    <div class="event">
+      <h3>
+        <span>
+          <b><%= event.start_date.strftime("%a %d %b") %></b>
+          <i>
+            <small>AT</small>
+            <%= event.start_date.strftime("%I:%M %p") %>
+          </i>
+        </span>
+      </h3>
+      <div class="img"><img src="/images/vivace_gmap.png" align="right" vspace="5" hspace="5" alt="<%= event.location.name %> | Google Maps" title="<%= event.location.name %> | Google Maps" /></div>
+      <p class="title">
+        <b><%= event.name %></b>
+      </p>
+      <p class="at">
+        <em>AT</em>
+        <b><%= event.location.name %></b>
+        <u><%= event.location.address %></u>
+      </p>
+      <p class="time">
+        <em>MORE</em>
+        <strong><%= ((event.end_date - event.start_date) / 60 ) / 60 %> hours</strong>
+        <span><%= event.description %></span>
+        <span><%= event.location.note %></span>
+      </p>
+      <hr size="1" />
+      <div style="clear:both;"></div>
+    </div>
+    <% end %>
+  </div>
+  <hr size="1" />
+  <ul>
+    <li><a href="#">Add Event</a></li>
+  </ul>
+</div>
