@@ -16,7 +16,6 @@ class Group < ActiveRecord::Base
 #   end
 
   def scrub_url
-
     if self.url == "http://"
       self.url = nil
     end

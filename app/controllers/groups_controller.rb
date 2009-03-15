@@ -3,11 +3,12 @@ class GroupsController < ApplicationController
   def index
     get_sort_order
 
-    @groups = Group.find  :all, 
+    @groups = Group.paginate  :all, 
                           :include => :locations,
                           :order => @group_list,
                           :conditions => @conditions,
-                          :limit => 10
+                          :page => params[:page],
+                          :per_page => 10
 
 #     @groups = params[:q] ? Group.serach(params[:q]) : Group.find  :all, 
 #                           :include => :locations,
