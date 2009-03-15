@@ -2,11 +2,18 @@ class GroupsController < ApplicationController
 
   def index
     get_sort_order
+
     @groups = Group.find  :all, 
                           :include => :locations,
                           :order => @group_list,
                           :conditions => @conditions,
                           :limit => 10
+
+#     @groups = params[:q] ? Group.serach(params[:q]) : Group.find  :all, 
+#                           :include => :locations,
+#                           :order => @group_list,
+#                           :conditions => @conditions,
+#                           :limit => 10
 
     respond_to do |format|
       format.html
@@ -23,7 +30,6 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(params[:group])
-    check_url
     respond_to do |format|
       if @group.save
         format.html { redirect_to(@group) }
@@ -70,11 +76,6 @@ private
   def redirect_to_index message = nil
     flash[:notice] = message if message
     redirect_to :action => :index
-  end
-
-  def check_url
-    url = params[:group][:url]
-    @group.url = nil if url == "http://"    
   end
 
 end
