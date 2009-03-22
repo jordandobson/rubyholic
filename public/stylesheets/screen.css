@@ -177,6 +177,7 @@ div#pgHome menu li strong{
 
 div#pgHome menu li a,
 div#pgHome ul li a,
+div#pgHome ul li span,
 div#groupForm menu li a,
 div#groupShow menu li a{
   display: block;
@@ -281,9 +282,9 @@ div#groupShow ul li{
 }
 div#pgHome ul li a,
 div#groupForm ul li a,
-div#groupShow ul li a{
+div#groupShow ul li a,
+div#pgHome ul li span{
   display: block;
-  float: right;
   background-color: #fff;
   font-size: .5em;
   text-transform: Uppercase;
@@ -295,12 +296,24 @@ div#groupShow ul li a{
   word-spacing: 3px;
   letter-spacing: 1px;
 }
-
-div#pgHome ul li input,
-div#groupForm ul li input{
+div#pgHome ul li span.disabled{
+  background-color: #000;
+  -webkit-box-shadow: none;
+  color: #fff;
+  opacity: .20;
+  margin-left: 0em;
+}
+div#pgHome ul li span.current{
+  background-color: #000;
+  -webkit-box-shadow: none;
+  color: #fff;
+}
+div#pgHome ul li a,
+div#pgHome ul li span{
   float: left;
-  width: 60px;
-  margin-right: 20px;
+}
+div#pgHome ul li.add a{
+  float: right;
 }
 /* SHOW PAGE */
 div#groupShow{

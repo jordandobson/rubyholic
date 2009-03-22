@@ -34,7 +34,6 @@
     <% if group.locations.length == 0
          link_text = "<big>#{group.name}</big><br /><em>No Meetings Scheduled</em>"
        end
-
        group.locations.each do |location|
          link_text = "<big>#{group.name}</big><br /><em><b>Meet At</b> <span>#{location.name}</span></em>"
        end  
@@ -46,11 +45,23 @@
   </ol>
   <hr size="1" />
   <ul>
-    <li><%= link_to 'Add Group', :controller => 'groups', :action => 'new' %></li>
-<!--    <li><%= link_to 'Add Location', :controller => 'locations', :action => 'new' %></li>
-    <li><%= link_to 'Add Event', :controller => 'events', :action => 'new' %></li>-->
-    <li><input disabled="disabled" type="button" value="Back" /></li>
-    <li><input disabled="disabled" type="button" value="Next" /></li>
+    <% paginate_list = will_paginate @groups
+      if paginate_list
+        paginate_list = "<li>#{paginate_list}</li>"
+      end -%>
+    <%= paginate_list %>
+    <li class="add"><%= link_to 'Add Group', :controller => 'groups', :action => 'new' %></li>
   </ul>
-  <!--<%= will_paginate @groups %>-->
+  <!--
+  <ul>
+
+    <li><%= link_to 'Add Location', :controller => 'locations', :action => 'new' %></li>
+    <li><%= link_to 'Add Event', :controller => 'events', :action => 'new' %></li>
+  </ul>
+    -->
 </div>
+<!--<span id="request"><%= request.env['REMOTE_ADDR'] %></span>
+<span id="request"><%= request.env['REMOTE_IP'] %></span>
+<span id="request"><%= request.env['HTTP_CLIENT_IP'] %></span>
+<span id="request"><%= request.env['HTTP_X_FORWARDED_FOR'] %></span>
+<span id="request"><%= request.inspect %></span>-->

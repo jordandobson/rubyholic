@@ -72,6 +72,14 @@ Rails::Initializer.run do |config|
   # Activate observers that should always be running
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
+
+  # For GEOKIT - INSTRUCTIONS at http://geokit.rubyforge.org/
+  config.gem "andre-geokit", :lib=>'geokit', :source => 'http://gems.github.com'
+  config.gem "thoughtbot-shoulda", :lib=>'shoulda', :source => 'http://gems.github.com'
+
 end
+
+require 'geoip_city'
+CITY_DB = GeoIPCity::Database.new("#{RAILS_ROOT}/lib/GeoLiteCity.dat")
 
 require "will_paginate"

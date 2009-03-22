@@ -68,51 +68,37 @@ class GroupsControllerTest < ActionController::TestCase
   test "should sort by group name ascending" do
     get :index, :s => 'asc', :by => 'groups'
     grps =  assigns(:groups)
-    assert_equal grps[0].name, groups('two').name
-    assert_equal grps[1].name, groups('three').name
-    assert_equal grps[2].name, groups('four').name
-    assert_equal grps[3].name, groups('five').name
-    assert_equal grps[4].name, groups('six').name
-    assert_equal grps[5].name, groups('seven').name
-    assert_equal grps[6].name, groups('eight').name
-    assert_equal grps[7].name, groups('nine').name
-    assert_equal grps[8].name, groups('ten').name
-    assert_equal grps[9].name, groups('eleven').name
+
+    %w{ two three four five six seven eight nine ten eleven }.each_with_index do |name, i|
+      assert_equal grps[i].name, groups(name).name
+    end
   end
 
   test "should sort by group descending" do
     get :index, :s => 'desc', :by => 'groups'
     grps =  assigns(:groups)
-    assert_equal grps[0].name, groups('one').name
-    assert_equal grps[1].name, groups('twelve').name
-    assert_equal grps[2].name, groups('eleven').name
-    assert_equal grps[3].name, groups('ten').name
-    assert_equal grps[4].name, groups('nine').name
-    assert_equal grps[5].name, groups('eight').name
-    assert_equal grps[6].name, groups('seven').name
-    assert_equal grps[7].name, groups('six').name
-    assert_equal grps[8].name, groups('five').name
-    assert_equal grps[9].name, groups('four').name
+
+    %w{ one twelve eleven ten nine eight seven six five four }.each_with_index do |name, i|
+      assert_equal grps[i].name, groups(name).name
+    end
   end
 
   test "should sort by location ascending" do
     get :index, :s => 'asc', :by => 'locations'
     grps =  assigns(:groups)
-    assert_equal grps[0].name, groups('ten').name
-    assert_equal grps[1].name, groups('three').name
-    assert_equal grps[2].name, groups('four').name
-    assert_equal grps[3].name, groups('five').name
-    assert_equal grps[4].name, groups('one').name
+
+    %w{ ten three four five one }.each_with_index do |name, i|
+      assert_equal grps[i].name, groups(name).name
+    end
   end
 
   test "should sort by location descending" do
     get :index, :s => 'desc', :by => 'locations'
     grps =  assigns(:groups)
-    assert_equal grps[0].name, groups('one').name
-    assert_equal grps[1].name, groups('five').name
-    assert_equal grps[2].name, groups('four').name
-    assert_equal grps[3].name, groups('three').name
-    assert_equal grps[4].name, groups('ten').name
+
+    %w{ one five four three ten }.each_with_index do |name, i|
+      assert_equal grps[i].name, groups(name).name
+    end
   end
 
   test "should get new" do
@@ -274,7 +260,7 @@ class GroupsControllerTest < ActionController::TestCase
     assert "div.fieldWithErrors input[name*=group[name]]"
   end
 
-  test "should not include https for url" do
+  test "should not include http in url" do
     put :update, :id => groups(:one).id, :group => {
       :url => 'http://'
     }
@@ -347,7 +333,7 @@ class GroupsControllerTest < ActionController::TestCase
 #     ip = "66.234.6.100"
 #     @request.env['REMOTE_HOST'] = ip
 #     
-#     flexmock(GeoIPClient).should_receive(:city).once.with9ip0.and_return(
+#     flexmock(GeoIPClient).should_receive(:city).once.with(ip).and_return(
 #       [#... all GEO IP STUFF]
 #     )
 #     get :index

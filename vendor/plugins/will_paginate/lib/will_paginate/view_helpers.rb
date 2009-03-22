@@ -27,12 +27,12 @@ module WillPaginate
       :next_label     => 'Next',
       :inner_window   => 4, # links around the current page
       :outer_window   => 1, # links around beginning and end
-      :separator      => ' ', # single space is friendly to spiders and non-graphic browsers
+      :separator      => '</li><li>', # single space is friendly to spiders and non-graphic browsers
       :param_name     => :page,
       :params         => nil,
       :renderer       => 'WillPaginate::LinkRenderer',
       :page_links     => true,
-      :container      => true
+      :container      => false
     }
     mattr_reader :pagination_options
 

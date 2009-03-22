@@ -1,6 +1,11 @@
 require 'test_helper'
 
+
 class GroupTest < ActiveSupport::TestCase
+
+  should_have_many :events
+  should_have_many :locations, :through => :events
+  should_not_allow_values_for :name, "'"
 
   def setup
     @group = Group.new
