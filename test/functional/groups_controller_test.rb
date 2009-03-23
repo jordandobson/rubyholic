@@ -17,7 +17,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   fixtures :groups
 
-  #### NEW
+  #### INDEX
  
   test "should get index" do
     get :index
@@ -104,7 +104,29 @@ class GroupsControllerTest < ActionController::TestCase
     end
   end 
 
-end
+  test "should have paging at bottom" do
+    get :index
+    # I should probably put this in a loop like above
+    assert_match    /<span class=\"disabled prev_page\">Last<\/span>/,               @response.body
+    assert_match    /<span class=\"current\">1<\/span>/,                             @response.body
+    assert_match    /<a href=\"\/groups\?page=2\" .*>2<\/a>/,                        @response.body
+    assert_match    /<a href=\"\/groups\?page=2\" class="next_page" .*>Next<\/a>/,   @response.body
+    assert_no_match /<a href=\"\/groups\?page=3\"/,                                  @response.body
+  end
+
+  test "should have second page paging links at bottom" do
+    get :index, :page => '2'
+    assert_match    /<a href=\"\/groups\?page=1\" class=\"prev_page\" .*>Last<\/a>/, @response.body
+    assert_match    /<a href=\"\/groups\?page=1\" .*>1<\/a>/,                        @response.body
+    assert_match    /<span class=\"current\">2<\/span>/,                             @response.body
+    assert_match    /<span class=\"disabled next_page\">Next<\/span>/,               @response.body
+    assert_no_match /<a href=\"\/groups?page=3\"/,                                   @response.body
+  end
+
+  test "should not have paging links at bottom" do
+    get :index, :s => 'desc', :by => 'locations'
+    assert_no_match    /<span class=\"current\">\d<\/span>/,                             @response.body
+  end
 
   #### NEW
 
@@ -337,11 +359,44 @@ end
     assert_no_match /<em>INFO<\/em>/i, @response.body
   end
 
-#   test "show not should display group info label if it doesn't exist" do
-#     get :show, :id => groups(:three).id
-#     assert assigns(:group)
-#     assert_no_match /<em>INFO<\/em>/i, @response.body
-#   end
+  test "show event wrapper" do
+    get :show, :id => groups(:ten).id
+    assert assigns(:group)
+    assert_match /<div class=\"event\">/i, @response.body
+  end
+
+  test "show event date and time" do
+    get :show, :id => groups(:ten).id
+    grp = assigns(:group)
+    assert_match /<b>#{grp.events[0].start_date.strftime("%a %d %b")}<\/b>/i, @response.body
+    assert_match /<i>.*#{grp.events[0].start_date.strftime("%I:%M %p")}.*<\/i>/im, @response.body
+  end
+
+  test "show event location map image and map link" do
+    get :show, :id => groups(:ten).id
+    grp = assigns(:group)
+    loc = grp.events[0].location
+    assert_match /<a.*ll=#{loc.lat},#{loc.lng}.*title=\"View Map on Google\">/i, @response.body
+    assert_match /<img src=\"http:\/\/maps.google.com\/staticmap\?center=#{loc.lat},#{loc.lng}&zoom=14.*\/><\/a>/im, @response.body
+  end
+
+  test "display event info" do
+    get :show, :id => groups(:ten).id
+    event = assigns(:group).events[0]
+    assert_match /<p class=\"title">.*<b>#{event.name}<\/b>.*<\/p>/im, @response.body
+    assert_match /<span>#{event.description}<\/span>/i, @response.body
+    assert_match /<strong>#{((event.end_date - event.start_date) / 60 ) / 60} hours<\/strong>/i, @response.body
+  end
+
+  test "display location info for event" do
+    get :show, :id => groups(:ten).id
+    loc = assigns(:group).events[0].location
+      #assert_match /#{loc.address.gsub(" ","+")}/, @response.body
+      assert_match /<u>#{loc.address}<\/u>/, @response.body
+      assert_match /<span class=\"note\">#{loc.note}<\/span>/, @response.body
+  end
+
+
 
   test "show error with invalid group id" do
     assert_raise ActiveRecord::RecordNotFound do

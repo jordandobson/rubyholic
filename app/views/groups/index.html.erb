@@ -8,8 +8,6 @@
     toggle_sort = "desc"
   end
 -%>
-<!--  <%= @location %>
-  <%= @visitor.inspect %> -->
 <div id="pgHome">
   <hr size="1" />
   <div id="head">
@@ -56,16 +54,4 @@
     <li class="add"><%= link_to '✚ Location', :controller => 'locations', :action => 'new' %></li>
     <li class="add"><%= link_to '✚ Event', :controller => 'events', :action => 'new' %></li>
   </ul>
-  <!--
-  <ul>
-
-    
-    <li><%= link_to 'Add Event', :controller => 'events', :action => 'new' %></li>
-  </ul>
-    -->
 </div>
-<!--<span id="request"><%= request.env['REMOTE_ADDR'] %></span>
-<span id="request"><%= request.env['REMOTE_IP'] %></span>
-<span id="request"><%= request.env['HTTP_CLIENT_IP'] %></span>
-<span id="request"><%= request.env['HTTP_X_FORWARDED_FOR'] %></span>
-<span id="request"><%= request.inspect %></span>-->
