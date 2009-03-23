@@ -122,12 +122,12 @@ h2{
   text-align: left;
   background-color: #3cd0e6;
   padding: 10px 20px;
-  color: #fff;
+  color: #000;
   font-weight: bold;
   font-family: "Arial Black", arial, sans-serif;
   font-weight: bold;
   text-transform: Uppercase;
-  text-shadow: 1px 1px 1px #999;
+  text-shadow: 1px 1px 1px #CAF2F8;
   line-height: 1em;
   height: 1em;
 }
@@ -141,6 +141,7 @@ h2 span{
 
 div#pgHome,
 div#groupForm,
+div#locationForm,
 div#groupShow{
   border: 1px solid #333;
   border-top: none;
@@ -153,6 +154,7 @@ div#groupShow{
 }
 div#pgHome menu,
 div#groupForm menu,
+div#locationForm menu,
 div#groupShow menu{
   height: 1em;
   position: absolute;
@@ -164,6 +166,7 @@ div#groupShow menu{
 }
 div#pgHome menu li,
 div#groupForm menu li,
+div#locationForm menu li
 div#groupShow menu li{
   display: inline;
 }
@@ -179,6 +182,7 @@ div#pgHome menu li a,
 div#pgHome ul li a,
 div#pgHome ul li span,
 div#groupForm menu li a,
+div#locationForm menu li a,
 div#groupShow menu li a{
   display: block;
   float: right;
@@ -197,6 +201,7 @@ div#groupShow menu li a{
 div#pgHome menu li a:hover,
 div#pgHome ul li a:hover,
 div#groupForm menu li a:hover,
+div#locationForm menu li a:hover,
 div#groupShow menu li a:hover,
 div#groupShow ul li a:hover{
   background-color: #000;
@@ -210,7 +215,9 @@ div#groupShow ul li a:hover{
 div#pgHome menu li a:active,
 div#pgHome ul li a:active,
 div#groupForm menu li a:active,
+div#locationForm menu li a:active,
 div#groupForm ul li a:active,
+div#locationForm ul li a:active,
 div#groupShow menu li a:active,
 div#groupShow ul li a:active{
   -webkit-box-shadow: 1px 1px 1px #2d9cac;
@@ -219,13 +226,14 @@ div#groupShow ul li a:active{
 div#pgHome menu li b a,
 div#pgHome menu li b a:hover,
 div#pgHome menu li b a:active{
-  -webkit-box-shadow: 1px 1px 1px #2d9cac;
-  background-color: #1e6873;
   cursor: default;
+  background-color: #1E6873;
+  -webkit-box-shadow: 1px 1px 1px #CAF2F8;
   color: #fff;
 }
 div#pgHome ol,
 div#groupForm ol,
+div#locationForm ol,
 div#groupShow ol{
   text-align: left;
   background-color: #fff;
@@ -233,6 +241,7 @@ div#groupShow ol{
 div#pgHome ol li{}
 div#pgHome ol li a,
 div#groupForm ol li a,
+div#locationForm ol li a,
 div#groupShow ol li a{
   display: block;
   padding: 9px 30px 10px 30px;
@@ -265,6 +274,7 @@ div#pgHome ol li a:hover em b{
 }
 div#pgHome ul,
 div#groupForm ul,
+div#locationForm ul,
 div#groupShow ul{
   padding: 10px 20px 10px 20px;
   height: 1em;
@@ -277,11 +287,13 @@ div#groupShow ul{
 }
 div#pgHome ul li,
 div#groupForm ul li,
+div#locationForm ul li,
 div#groupShow ul li{
   display: inline;
 }
 div#pgHome ul li a,
 div#groupForm ul li a,
+div#locationForm ul li a,
 div#groupShow ul li a,
 div#pgHome ul li span{
   display: block;
@@ -301,18 +313,22 @@ div#pgHome ul li span.disabled{
   -webkit-box-shadow: none;
   color: #fff;
   opacity: .20;
-  margin-left: 0em;
+}
+div#pgHome ul li .prev_page{
+  margin-left: 0em !important;
 }
 div#pgHome ul li span.current{
-  background-color: #000;
-  -webkit-box-shadow: none;
+  cursor: default;
+  background-color: #1E6873;
+  -webkit-box-shadow: 1px 1px 1px #CAF2F8;
   color: #fff;
 }
 div#pgHome ul li a,
 div#pgHome ul li span{
   float: left;
 }
-div#pgHome ul li.add a{
+div#pgHome ul li.add a,
+div#groupShow ul li.add a{
   float: right;
 }
 /* SHOW PAGE */
@@ -344,6 +360,9 @@ div#groupShow p em{
   width: 3.25em;
   text-align: center;
 }
+div#groupShow p.wide em{
+  width: 6.25em;
+}
 div#groupShow p a:after{
   content: "➚";
   padding: 0 .25em;
@@ -360,7 +379,9 @@ div#groupShow p a:hover:after{
   background-color: #c32f19;
   border: 1px solid #c32f19;
 }
-
+div#groupShow p.at a:after{
+  display: none;
+}
 div#groupShow h3{
   font-size: .75em;
   color: #111;
@@ -409,6 +430,10 @@ div#groupShow p span{
   padding-left: 20px;
   line-height: 1.5em;
 }
+div#groupShow p span.note{
+  color: #999;
+  font-style: italic;
+}
 div#groupShow p.title{
   margin-bottom: 10px;
   font-family: helvetica, arial, sans-serif;
@@ -444,12 +469,14 @@ div.event p{
   margin-left: 10px;
 }
 /* NEW PAGE */
-div#groupForm{
+div#groupForm,
+div#locationForm{
   text-align : left;
   background-color: #fff;
   overflow: hidden;
 }
-div#groupForm label{
+div#groupForm label,
+div#locationForm label{
   float: left;
   width: 19.25%;
   display: block;
@@ -460,7 +487,9 @@ div#groupForm label{
   color: #3cd0e6;
 }
 div#groupForm div input,
-div#groupForm div textarea{
+div#groupForm div textarea,
+div#locationForm div input,
+div#locationForm div textarea{
   width: 74%;
   padding: .5em;
   margin: 0;
@@ -472,44 +501,57 @@ div#groupForm div textarea{
   color: #999999;
   background-color: #eee;
 }
-div#groupForm div input{
+div#groupForm div input,
+div#locationForm div input{
   padding: .5em;
 }
-div#groupForm div textarea{
+div#groupForm div textarea,
+div#locationForm div textarea{
   height: 10em;
   padding: .5em;
   font-size: 1em;
   font-family: Georgia;
 }
 div#groupForm div input:hover,
-div#groupForm div textarea:hover{
+div#groupForm div textarea:hover,
+div#locationForm div input:hover,
+div#locationForm div textarea:hover{
   border: 1px solid #aaa;
   color: #555;
 }
-div#groupForm div label:before{
+div#groupForm div label:before,
+div#locationForm div label:before{
   display: block;
 }
 div#groupForm div input:focus,
-div#groupForm div textarea:focus{
+div#groupForm div textarea:focus,
+div#locationForm div input:focus,
+div#locationForm div textarea:focus{
   background-color: #fdfdaa;
   color: #000000;
   border-color: #fff;
   border: 1px solid #666 !important;
 }
 div#groupForm div input:active,
-div#groupForm div textarea:active{
+div#groupForm div textarea:active,
+div#locationForm div input:active,
+div#locationForm div textarea:active{
   background-color: #F6F6CC !important;
 }
-div#groupForm div#body{
+div#groupForm div#body,
+div#locationForm div#body{
   padding: 20px 20px 0px 20px;
 }
-div#groupForm div#body div{
+div#groupForm div#body div,
+div#locationForm div#body div{
   clear: both;
 }
-div#groupForm div#body div.fieldWithErrors{
+div#groupForm div#body div.fieldWithErrors,
+div#locationForm div#body div.fieldWithErrors{
   clear: none;
 }
-div#groupForm ul li input{
+div#groupForm ul li input,
+div#locationForm ul li input{
   width: 19.25%;
   display: block;
   font-weight: bold;
@@ -522,13 +564,19 @@ div#groupForm ul li input{
   color: #000;
   text-shadow: 1px 1px 2px #aaa;
 }
+div#locationForm ul li input#location_submit{
+  width: 23%;
+}
 
-div#groupForm.edit ul li input{
+div#groupForm.edit ul li input,
+div#locationForm.edit ul li input{
   text-indent: .05em;
   word-spacing: .25em;
 }
 div#groupForm ul li input:hover,
-div#groupForm ul li input:focus{
+div#groupForm ul li input:focus,
+div#locationForm ul li input:hover,
+div#locationForm ul li input:focus{
   text-shadow: 0px 0px 2px #333;
 }
                                                               /* ERRORS */
@@ -585,4 +633,32 @@ div#error ul li{
 }
 div.fieldWithErrors label{
   color: red !important;
+}
+                                                              /* Location ADD */
+textarea.street_address{
+  height: 5em !important;
+}
+                                                              /* Location SHOW */
+a img{
+  opacity: .99;
+}
+a:hover img{
+  opacity: .5;
+}
+a.location_map{
+  display: block;
+  margin-bottom: 1em;
+}
+a.location_map img{
+  float: none;
+  border: 1px solid #999;
+}
+
+div#groupShow div.img{
+  float: right;
+  width: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+  border: 1px solid #999;
+  margin-right: 10px;
 }

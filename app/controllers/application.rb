@@ -14,4 +14,12 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
+
+  # Auto-geocode the user's ip address and store in the session.
+#   geocode_ip_address
+# 
+#   def geokit
+#     @location = session[:geo_location]  # @location is a GeoLoc instance.
+#   end
+
 end

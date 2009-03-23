@@ -1,28 +1,97 @@
-<p>
-  <b>Venue:</b>
-  <%=h @location.name %>
-</p>
-
-<p>
-  <b>Address:</b>
-  <%=h @location.address %>
-</p>
-
-<p>
-  <b>Lat:</b>
-  <%=h @location.lat %>
-</p>
-
-<p>
-  <b>Lng:</b>
-  <%=h @location.lng %>
-</p>
-
-<p>
-  <b>Note:</b>
-  <%=h @location.note %>
-</p>
-
-
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+<div id="groupShow">
+  <hr size="1" />
+  <div id="head">
+    <h2><span><%=h @location.name %></span></h2>
+    <menu>
+      <li><%= link_to 'Edit Location', :controller => 'locations', :action => 'edit' %></li>
+    </menu>
+  </div>
+  <div id="body">
+    <% if @location.lat && @location.lat && @location.address
+          map_link = "http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{@location.address.gsub(' ', '+')}&sll=#{@location.lat},#{@location.lng}&sspn=0.008054,0.013561&ie=UTF8&ll=#{@location.lat},#{@location.lng}&spn=0.008054,0.013561&z=16" -%> 
+        <a href="<%= map_link %>" target="_blank" title="View Map on Google" class="location_map"><img src="http://maps.google.com/staticmap?center=<%= @location.lat %>,<%= @location.lng %>&zoom=14&size=598x198&maptype=mobile&markers=<%= @location.lat %>,<%= @location.lng %>,redV&key=MAPS_API_KEY&sensor=false" align="right" width="598" height="198" vspace="5" hspace="5" alt="<%= @location.name %> | Google Maps" title="<%= @location.name %> | Google Maps" /></a>
+    <% end %>
+    <p class="wide"><em>ADDRESS</em>
+    <% if @location.lat && @location.lat && @location.address
+          map_link = "http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{@location.address.gsub(' ', '+')}&sll=#{@location.lat},#{@location.lng}&sspn=0.008054,0.013561&ie=UTF8&ll=#{@location.lat},#{@location.lng}&spn=0.008054,0.013561&z=16" -%> 
+         <a href="<%= map_link %>" target="_blank" title="View Map on Google"><%=h @location.address %></a>
+    <% elsif @location.address == "" -%>
+        <%= link_to 'Add an address for this location.', edit_location_path(@location) %>
+    <% else 
+          map_link = "http://maps.google.com/maps?f=q&q=#{@location.address.gsub(' ', '+')}&z=14" -%>
+         <a href="<%= map_link %>" target="_blank" title="View Map on Google"><%=h @location.address %></a>
+    <% end %>
+        </p>
+    <% if @location.note != "" && @location.note != nil -%>
+        <p class="wide"> <em>MORE INFO</em> <%=h @location.note %></p>
+    <% end -%>      
+    <!--<div class="event">
+      <h3>
+        <span>
+          <b>Tue 24 Feb</b>
+          <i>
+            <small>AT</small>
+            07:00 PM
+          </i>
+        </span>
+      </h3>
+      <div class="img">
+         
+        <a href="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=550+East+Broadway,+Seattle,+WA,+98102&sll=47.6237304,-122.3209356&sspn=0.008054,0.013561&ie=UTF8&ll=47.6237304,-122.3209356&spn=0.008054,0.013561&z=16" target="_blank" title="View Map on Google"><img src="http://maps.google.com/staticmap?center=47.6237304,-122.3209356&zoom=14&size=300x180&maptype=mobile&markers=47.6237304,-122.3209356,redV&key=MAPS_API_KEY&sensor=false" align="right" width="300" height="180" vspace="5" hspace="5" alt="Vivace Cafe | Google Maps" title="Vivace Cafe | Google Maps" /></a>
+              </div>
+      <p class="title">
+        <b>Hack Night!</b>
+      </p>
+      <p class="at">
+        <em>AT</em>
+        <b><a href="/locations/953125641" class="loc_link">Vivace Cafe</a></b>
+        <u>550 East Broadway, Seattle, WA, 98102</u>
+      </p>
+      <p class="time">
+        <em>MORE</em>
+        <strong>2.0 hours</strong>
+        <span>Everyone is Welcome!</span>
+        <span class="note">We meet in the back room.</span>
+      </p>
+      <hr size="1" />
+      <div style="clear:both;"></div>
+    </div>
+    
+    <div class="event">
+      <h3>
+        <span>
+          <b>Wed 25 Feb</b>
+          <i>
+            <small>AT</small>
+            11:44 PM
+          </i>
+        </span>
+      </h3>
+<!--      <div class="img">
+         
+        <a href="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=550+East+Broadway,+Seattle,+WA,+98102&sll=47.6237304,-122.3209356&sspn=0.008054,0.013561&ie=UTF8&ll=47.6237304,-122.3209356&spn=0.008054,0.013561&z=16" target="_blank" title="View Map on Google"><img src="http://maps.google.com/staticmap?center=47.6237304,-122.3209356&zoom=14&size=300x180&maptype=mobile&markers=47.6237304,-122.3209356,redV&key=MAPS_API_KEY&sensor=false" align="right" width="300" height="180" vspace="5" hspace="5" alt="Vivace Cafe | Google Maps" title="Vivace Cafe | Google Maps" /></a>
+              </div>
+      <p class="title">
+        <b>Hack Night</b>
+      </p>
+      <p class="at">
+        <em>AT</em>
+        <b><a href="/locations/953125641" class="loc_link">Vivace Cafe</a></b>
+        <u>550 East Broadway, Seattle, WA, 98102</u>
+      </p>
+      <p class="time">
+        <em>MORE</em>
+        <strong>0.0 hours</strong>
+        <span>Everyone is Welcome!</span>
+        <span class="note">We meet in the back room.</span>
+      </p>
+      <hr size="1" />
+      <div style="clear:both;"></div>
+    </div>-->
+    
+  </div>
+  <hr size="1" />
+  <ul>
+    <li class="add"><a href="/events/new">✚  Event</a></li>
+  </ul>
+</div>

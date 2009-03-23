@@ -1,9 +1,16 @@
+<%
+  if request.env['HTTP_REFERER']
+    cancel_link = request.env['HTTP_REFERER']
+  else
+    cancel_link = @group
+  end
+%>
 <div id="groupForm" class="edit">
   <hr size="1" />
   <div id="head">
     <h2>Update Group Info</h2>
     <menu>
-    <li><%= link_to 'Cancel', @group %></li>
+    <li><%= link_to 'Cancel', cancel_link %></li>
     </menu>
   </div>
   <% form_for(@group) do |f| -%>

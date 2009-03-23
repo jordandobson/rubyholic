@@ -8,6 +8,8 @@
     toggle_sort = "desc"
   end
 -%>
+<!--  <%= @location %>
+  <%= @visitor.inspect %> -->
 <div id="pgHome">
   <hr size="1" />
   <div id="head">
@@ -50,12 +52,13 @@
         paginate_list = "<li>#{paginate_list}</li>"
       end -%>
     <%= paginate_list %>
-    <li class="add"><%= link_to 'Add Group', :controller => 'groups', :action => 'new' %></li>
+    <li class="add"><%= link_to '✚ Group', :controller => 'groups', :action => 'new' %></li>
+    <li class="add"><%= link_to '✚ Location', :controller => 'locations', :action => 'new' %></li>
   </ul>
   <!--
   <ul>
 
-    <li><%= link_to 'Add Location', :controller => 'locations', :action => 'new' %></li>
+    
     <li><%= link_to 'Add Event', :controller => 'events', :action => 'new' %></li>
   </ul>
     -->

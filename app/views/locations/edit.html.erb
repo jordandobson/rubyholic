@@ -1,32 +1,44 @@
-<h1>Editing location</h1>
+<%
+  if request.env['HTTP_REFERER']
+    cancel_link = request.env['HTTP_REFERER']
+  else
+    cancel_link = @location
+  end
+%>
 
-<% form_for(@location) do |f| %>
-  <%= f.error_messages %>
+<%=  %>
+<div id="locationForm" class="edit">
+  <hr size="1" />
+  <div id="head">
+    <h2>Edit Location</h2>
+    <menu>
+      <li><%= link_to "Cancel", cancel_link %></li>
+    </menu>
+  </div>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :address %><br />
-    <%= f.text_area :address %>
-  </p>
-  <p>
-    <%= f.label :lat %><br />
-    <%= f.text_field :lat %>
-  </p>
-  <p>
-    <%= f.label :lng %><br />
-    <%= f.text_field :lng %>
-  </p>
-  <p>
-    <%= f.label :note %><br />
-    <%= f.text_area :note %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @location %> |
-<%= link_to 'Back', locations_path %>
+  <% form_for(@location) do |f| -%>
+  <div id="body" class="new">
+      <div id="error"><%= f.error_messages -%></div>
+      <div>
+        <%= f.label :name, "Name" %>
+        <br />
+        <%= f.text_field :name %>
+      </div>
+      <div class="desc">
+        <%= f.label :address, "Full Address" %>
+        <br />
+        <%= f.text_area :address, :class => "street_address" %>
+      </div>
+      <div class="desc">
+        <%= f.label :note, "More Info" %>
+        <br />
+        <%= f.text_area :note %>
+      </div>
+      <div style="clear:both;"></div>
+  </div>
+  <hr size="1" />
+  <ul>
+    <li><%= f.submit "⇧ Save Location" %></li>
+  </ul>
+    <% end -%>
+</div>

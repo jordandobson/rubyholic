@@ -79,7 +79,9 @@ Rails::Initializer.run do |config|
 
 end
 
+require "will_paginate"
 require 'geoip_city'
+
 CITY_DB = GeoIPCity::Database.new("#{RAILS_ROOT}/lib/GeoLiteCity.dat")
 
-require "will_paginate"
+

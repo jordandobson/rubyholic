@@ -27,20 +27,27 @@
           </i>
         </span>
       </h3>
-      <div class="img"><img src="/images/vivace_gmap.png" align="right" vspace="5" hspace="5" alt="<%= event.location.name %> | Google Maps" title="<%= event.location.name %> | Google Maps" /></div>
+      <div class="img">
+        <% if event.location.lat && event.location.lat && event.location.address
+          map_link = "http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=#{event.location.address.gsub(' ', '+')}&sll=#{event.location.lat},#{event.location.lng}&sspn=0.008054,0.013561&ie=UTF8&ll=#{event.location.lat},#{event.location.lng}&spn=0.008054,0.013561&z=16" -%> 
+        <a href="<%= map_link %>" target="_blank" title="View Map on Google"><img src="http://maps.google.com/staticmap?center=<%= event.location.lat %>,<%= event.location.lng %>&zoom=14&size=300x180&maptype=mobile&markers=<%= event.location.lat %>,<%= event.location.lng %>,redV&key=MAPS_API_KEY&sensor=false" align="right" width="300" height="180" vspace="5" hspace="5" alt="<%= event.location.name %> | Google Maps" title="<%= event.location.name %> | Google Maps" /></a>
+        <% else -%>
+        <img src="/images/no_map.gif" align="right" width="300" height="180" vspace="5" hspace="5" alt="No Map Available" />
+        <% end -%>
+      </div>
       <p class="title">
         <b><%= event.name %></b>
       </p>
       <p class="at">
         <em>AT</em>
-        <b><%= event.location.name %></b>
+        <b><%= link_to event.location.name, event.location, { :class => "loc_link" } %></b>
         <u><%= event.location.address %></u>
       </p>
       <p class="time">
         <em>MORE</em>
         <strong><%= ((event.end_date - event.start_date) / 60 ) / 60 %> hours</strong>
         <span><%= event.description %></span>
-        <span><%= event.location.note %></span>
+        <span class="note"><%= event.location.note %></span>
       </p>
       <hr size="1" />
       <div style="clear:both;"></div>
@@ -49,6 +56,6 @@
   </div>
   <hr size="1" />
   <ul>
-    <li><a href="#">Add Event</a></li>
+    <li class="add"><%= link_to '✚  Event', :controller => 'events', :action => 'new' %></li>
   </ul>
 </div>

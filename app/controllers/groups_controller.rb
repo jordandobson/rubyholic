@@ -1,20 +1,25 @@
+
 class GroupsController < ApplicationController
+
+  require "geokit"
+  include GeoKit::Geocoders
+
+  #@location = GeoKit::Geocoders::IpGeocoder.geocode('12.215.42.19')
+  #@location = IpGeocoder.geocode('12.215.42.19')
+  #@location = GeoKit::Geocoders::MultiGeocoder.geocode('1121 S 9th St, Tacoma, Wa')
 
   def index
     get_sort_order
-
+    @location = MultiGeocoder.geocode('1121 S 9th St, Tacoma, Wa')
+    #@visitor = GeoKit::Geocoders::IpGeocoder.geocode('131.191.50.25')
     @groups = Group.paginate  :all, 
-                          :include => :locations,
-                          :order => @group_list,
-                          :conditions => @conditions,
-                          :page => params[:page],
-                          :per_page => 10
+                              :include => :locations,
+                              :order => @group_list,
+                              :conditions => @conditions,
+                              :page => params[:page],
+                              :per_page => 10
 
-#     @groups = params[:q] ? Group.serach(params[:q]) : Group.find  :all, 
-#                           :include => :locations,
-#                           :order => @group_list,
-#                           :conditions => @conditions,
-#                           :limit => 10
+    #@groups = params[:q] ? Group.serach(params[:q]) : Group.find  :all,  :include => :locations, :order => @group_list, :conditions => @conditions, :limit => 10
 
     respond_to do |format|
       format.html
