@@ -365,35 +365,52 @@ class GroupsControllerTest < ActionController::TestCase
     assert_match /<div class=\"event\">/i, @response.body
   end
 
+  test "do not show event wrapper" do
+    get :show, :id => groups(:two).id
+    assert assigns(:group)
+    assert_no_match /<div class=\"event\">/i, @response.body
+  end
+
   test "show event date and time" do
     get :show, :id => groups(:ten).id
     grp = assigns(:group)
-    assert_match /<b>#{grp.events[0].start_date.strftime("%a %d %b")}<\/b>/i, @response.body
-    assert_match /<i>.*#{grp.events[0].start_date.strftime("%I:%M %p")}.*<\/i>/im, @response.body
-  end
-
-  test "show event location map image and map link" do
-    get :show, :id => groups(:ten).id
-    grp = assigns(:group)
-    loc = grp.events[0].location
-    assert_match /<a.*ll=#{loc.lat},#{loc.lng}.*title=\"View Map on Google\">/i, @response.body
-    assert_match /<img src=\"http:\/\/maps.google.com\/staticmap\?center=#{loc.lat},#{loc.lng}&zoom=14.*\/><\/a>/im, @response.body
+    assert_match /<b>#{grp.events[0].start_date.strftime("%a %d %b")}<\/b>/i,       @response.body
+    assert_match /<i>.*#{grp.events[0].start_date.strftime("%I:%M %p")}.*<\/i>/im,  @response.body
   end
 
   test "display event info" do
     get :show, :id => groups(:ten).id
     event = assigns(:group).events[0]
-    assert_match /<p class=\"title">.*<b>#{event.name}<\/b>.*<\/p>/im, @response.body
-    assert_match /<span>#{event.description}<\/span>/i, @response.body
-    assert_match /<strong>#{((event.end_date - event.start_date) / 60 ) / 60} hours<\/strong>/i, @response.body
+    assert_match /<p class=\"title">.*<b>#{event.name}<\/b>.*<\/p>/im,                            @response.body
+    assert_match /<span>#{event.description}<\/span>/i,                                           @response.body
+    assert_match /<strong>#{((event.end_date - event.start_date) / 60 ) / 60} hours<\/strong>/i,  @response.body
+  end
+
+  test "show blank location map image for no address" do
+    get :show, :id => groups(:five).id
+    grp = assigns(:group)
+    assert_match /<div class=\"img\">.*<img src=\"\/images\/no_map.gif\".*\/>.*<\/div>/im,        @response.body
+    assert_no_match /<a.*title=\"View Map on Google\">/i,                                         @response.body
+  end
+  
+  test "show event location map image and map link" do
+    get :show, :id => groups(:ten).id
+    grp = assigns(:group)
+    loc = grp.events[0].location
+    assert grp.events[0].location.lng
+    assert grp.events[0].location.lat
+    assert grp.events[0].location.address 
+    assert_match /<a.*ll=#{loc.lat},#{loc.lng}.*title=\"View Map on Google\">/i,                                     @response.body
+    assert_match /<img src=\"http:\/\/maps.google.com\/staticmap\?center=#{loc.lat},#{loc.lng}&zoom=14.*\/><\/a>/im,  @response.body
   end
 
   test "display location info for event" do
     get :show, :id => groups(:ten).id
     loc = assigns(:group).events[0].location
-      #assert_match /#{loc.address.gsub(" ","+")}/, @response.body
-      assert_match /<u>#{loc.address}<\/u>/, @response.body
-      assert_match /<span class=\"note\">#{loc.note}<\/span>/, @response.body
+    #loc_address = loc.address.gsub(" ","+")
+    #assert_match /2508/i,                                    @response.body
+    assert_match /<u>#{loc.address}<\/u>/,                    @response.body
+    assert_match /<span class=\"note\">#{loc.note}<\/span>/,  @response.body
   end
 
 
