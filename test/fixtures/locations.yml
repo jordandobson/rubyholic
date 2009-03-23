@@ -1,41 +1,41 @@
 one:
   name: Vivace Cafe
   address: 550 East Broadway, Seattle, WA, 98102
-  lat: 1.5
-  lng: 1.5
+  lat: 47.6237304-122.3209356
+  lng: -122.3209356
   note: We meet in the back room.
 
 two:
   name: B Loc
   address: MyText
-  lat: 1.5
-  lng: 1.5
+  lat: 
+  lng: 
   note: MyText
 
 three:
   name: C Loc
-  address: MyText
-  lat: 1.5
-  lng: 1.5
-  note: MyText
+  address: 
+  lat: 
+  lng: 
+  note: This location has closed
 
 four:
   name: D Loc
-  address: MyText
-  lat: 1.5
-  lng: 1.5
-  note: MyText
+  address: 
+  lat: 
+  lng: 
+  note: 
 
 five:
   name: E Loc
-  address: MyText
-  lat: 1.5
-  lng: 1.5
-  note: MyText
+  address:
+  lat: 
+  lng: 
+  note: 
 
 six:
-  name: A Loc
-  address: MyText
-  lat: 1.5
-  lng: 1.5
-  note: MyText
+  name: A Squad
+  address: 2508 East Yesler Way, Seattle, Wa 98121
+  lat: 47.6016662
+  lng: -122.299492
+  note: Squad is located in Unit B

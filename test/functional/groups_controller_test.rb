@@ -16,6 +16,8 @@ class GroupsControllerTest < ActionController::TestCase
   # Show - location info
 
   fixtures :groups
+
+  #### NEW
  
   test "should get index" do
     get :index
@@ -38,7 +40,8 @@ class GroupsControllerTest < ActionController::TestCase
     # Groups are selected
     assert_match /<li>\s*<b>\s*<a href=\"\/groups\?by=groups&amp;s=asc\">Group<\/a>\s*<\/b>\s*<\/li>/m,       @response.body
     # Add group exists
-    assert_match /<a href.+>Add Group<\/a>/i, @response.body
+    assert_match /<a href.+>✚ Group<\/a>/i, @response.body
+    assert_match /<a href.+>✚ Location<\/a>/i, @response.body
   end
 
   test "should have interface select groups and set arrow up" do
@@ -99,7 +102,11 @@ class GroupsControllerTest < ActionController::TestCase
     %w{ one five four three ten }.each_with_index do |name, i|
       assert_equal grps[i].name, groups(name).name
     end
-  end
+  end 
+
+end
+
+  #### NEW
 
   test "should get new" do
     get :new
@@ -134,6 +141,8 @@ class GroupsControllerTest < ActionController::TestCase
       :name => 'group[url]', :value => 'http://'
     }
   end
+
+  #### CREATE
 
   test "should create group without url and description" do
     assert_difference('Group.count') do
@@ -197,6 +206,8 @@ class GroupsControllerTest < ActionController::TestCase
     assert_nil grp.url
   end
 
+  #### EDIT
+
   test "should get edit" do
     get :edit, :id => groups(:one).id
     assert_tag  :tag        => 'input', 
@@ -228,6 +239,8 @@ class GroupsControllerTest < ActionController::TestCase
     get :edit, :id => groups(:one).id
     assert_match /<a.*href.*\/groups.*>cancel<\/a>/i, @response.body
   end
+
+  #### UPDATE
 
   test "should update group name" do
     put :update, :id => groups(:one).id, :group => {
@@ -270,6 +283,7 @@ class GroupsControllerTest < ActionController::TestCase
     assert_nil grp.url
   end
 
+  #### SHOW
 
   test "should show group" do
     get :show, :id => groups(:one).id
@@ -295,7 +309,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test "show should have an add event link" do
     get :show, :id => groups(:one).id
-    assert_match /<a.*href.*>Add Event<\/a>/i, @response.body
+    assert_match /<a.*href.*>✚ Event<\/a>/i, @response.body
   end
 
   test "show should display group url" do
@@ -323,11 +337,19 @@ class GroupsControllerTest < ActionController::TestCase
     assert_no_match /<em>INFO<\/em>/i, @response.body
   end
 
+#   test "show not should display group info label if it doesn't exist" do
+#     get :show, :id => groups(:three).id
+#     assert assigns(:group)
+#     assert_no_match /<em>INFO<\/em>/i, @response.body
+#   end
+
   test "show error with invalid group id" do
     assert_raise ActiveRecord::RecordNotFound do
       get :show, :id => 'bad'
     end
   end
+
+  #### SHOW / Events & Location Info
 
 #   test "get index with ip address" do
 #     ip = "66.234.6.100"
