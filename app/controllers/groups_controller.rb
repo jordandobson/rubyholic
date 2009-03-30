@@ -1,19 +1,22 @@
 
 class GroupsController < ApplicationController
 
-  require "geokit"
-  include GeoKit::Geocoders
-
   def index
     get_sort_order
-    @groups = Group.paginate  :all, 
-                              :include => :locations,
-                              :order => @group_list,
-                              :conditions => @conditions,
-                              :page => params[:page],
-                              :per_page => 10
-
-    #@groups = params[:q] ? Group.serach(params[:q]) : Group.find  :all,  :include => :locations, :order => @group_list, :conditions => @conditions, :limit => 10
+    if params[:q]
+      @groups = Group.search(params[:q]).paginate :include => :locations,
+                                                  :order => @group_list,
+                                                  :conditions => @conditions,
+                                                  :page => params[:page],
+                                                  :per_page => 10
+    else
+      @groups = Group.paginate                    :all, 
+                                                  :include => :locations,
+                                                  :order => @group_list,
+                                                  :conditions => @conditions,
+                                                  :page => params[:page],
+                                                  :per_page => 10
+    end
 
     respond_to do |format|
       format.html

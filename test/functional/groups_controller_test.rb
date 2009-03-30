@@ -11,15 +11,16 @@ class GroupsControllerTest < ActionController::TestCase
   # Edit
   # Update
   # Show
+  # Show - location info
 
   # NEED TESTS FOR
-  # Show - location info
+  # Search
 
   fixtures :groups
 
   #### INDEX
- 
-  test "should get index" do
+
+ test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:groups)
@@ -110,7 +111,7 @@ class GroupsControllerTest < ActionController::TestCase
     assert_match    /<span class=\"disabled prev_page\">Last<\/span>/,               @response.body
     assert_match    /<span class=\"current\">1<\/span>/,                             @response.body
     assert_match    /<a href=\"\/groups\?page=2\" .*>2<\/a>/,                        @response.body
-    assert_match    /<a href=\"\/groups\?page=2\" class="next_page" .*>Next<\/a>/,   @response.body
+    assert_match    /<a href=\"\/groups\?page=2\" class=\"next_page\" .*>Next<\/a>/, @response.body
     assert_no_match /<a href=\"\/groups\?page=3\"/,                                  @response.body
   end
 
@@ -126,6 +127,51 @@ class GroupsControllerTest < ActionController::TestCase
   test "should not have paging links at bottom" do
     get :index, :s => 'desc', :by => 'locations'
     assert_no_match    /<span class=\"current\">\d<\/span>/,                             @response.body
+  end
+ 
+  test "search for ruby returns results" do
+    get :index, :q => 'ruby'
+    assert_response :success
+    assert_template "index"
+    assert assigns(:groups)
+    assert_not_nil assigns(:groups)
+  end 
+
+  test "search for socks returns no results" do
+    get :index, :q => 'socks'
+    assert_equal [], assigns(:groups)
+  end
+
+  test "search for ruby returns expected results in groups" do
+    get :index, :q => 'ruby'
+    grps = assigns(:groups)
+
+    %w{ eleven seven nine six ten }.each_with_index do |name, i|
+      assert_equal grps[i].name, groups(name).name
+    end
+  end
+
+  test "search for seattle returns expected results in locations" do
+    get :index, :q => 'seattle'
+    grps = assigns(:groups)
+
+    %w{ one twelve ten }.each_with_index do |name, i|
+      assert_equal grps[i].name, groups(name).name
+    end
+  end
+
+  test "search uses will paginate for more then ten results" do
+    get :index, :q => ' '
+    grps = assigns(:groups)
+    assert_equal 10, grps.length
+    assert_match    /<a href=\"\/groups\?page=2&amp;q=[+]\" class=\"next_page\" .*>Next<\/a>/,   @response.body
+  end
+
+  test "search uses will paginate and shows two results" do
+    get :index, :q => ' ', :page => '2'
+    grps = assigns(:groups)
+    assert_equal 2, grps.length
+    assert_match    /<a href=\"\/groups\?page=1&amp;q=[+]\" class=\"prev_page\" .*>Last<\/a>/,   @response.body
   end
 
   #### NEW
@@ -412,8 +458,6 @@ class GroupsControllerTest < ActionController::TestCase
     assert_match /<u>#{loc.address}<\/u>/,                    @response.body
     assert_match /<span class=\"note\">#{loc.note}<\/span>/,  @response.body
   end
-
-
 
   test "show error with invalid group id" do
     assert_raise ActiveRecord::RecordNotFound do

@@ -8,6 +8,7 @@
     toggle_sort = "desc"
   end
 -%>
+<!--<%= GeoIPClient.city('131.191.50.25') %>-->
 <div id="pgHome">
   <hr size="1" />
   <div id="head">
@@ -15,16 +16,16 @@
     <menu>
       <li><strong>Sort by</strong></li>
       <li>
-        <%= link_to toggle_arrow, :controller => 'groups', :action => "index", :s => toggle_sort, :by => @order_by %>
+        <%= link_to toggle_arrow,  :controller => 'groups', :action => "index", :s => toggle_sort, :by => @order_by %>
       </li>
       <li>
         <% if @order_by == 'locations' -%><b><% end -%>
-        <%= link_to "Location",    :controller => 'groups', :action => "index", :s => 'asc',      :by => "locations" %>
+        <%= link_to "Location",    :controller => 'groups', :action => "index", :s => 'asc',       :by => "locations" %>
         <% if @order_by == 'locations' -%></b><% end -%>
       </li>
       <li>
         <% if @order_by == 'groups' -%><b><% end -%>
-        <%= link_to "Group",       :controller => 'groups', :action => "index", :s => 'asc',      :by => "groups" %>
+        <%= link_to "Group",       :controller => 'groups', :action => "index", :s => 'asc',       :by => "groups" %>
         <% if @order_by == 'groups' -%></b><% end -%>
       </li>
     </menu>
@@ -45,13 +46,13 @@
   </ol>
   <hr size="1" />
   <ul>
-    <% paginate_list = will_paginate @groups
+    <% paginate_list = will_paginate(@groups)
       if paginate_list
         paginate_list = "<li>#{paginate_list}</li>"
       end -%>
     <%= paginate_list %>
-    <li class="add"><%= link_to '✚ Group', :controller => 'groups', :action => 'new' %></li>
+    <li class="add"><%= link_to '✚ Group',    :controller => 'groups',    :action => 'new' %></li>
     <li class="add"><%= link_to '✚ Location', :controller => 'locations', :action => 'new' %></li>
-    <li class="add"><%= link_to '✚ Event', :controller => 'events', :action => 'new' %></li>
+    <li class="add"><%= link_to '✚ Event',    :controller => 'events',    :action => 'new' %></li>
   </ul>
 </div>

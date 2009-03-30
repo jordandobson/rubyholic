@@ -1,8 +1,4 @@
-require "geokit"
-
 class Location < ActiveRecord::Base
-
-  include GeoKit::Geocoders
 
   before_validation :geocode_address
 
@@ -10,6 +6,8 @@ class Location < ActiveRecord::Base
   has_many :group, :through => :events
 
   validates_presence_of :name
+
+private
 
   def geocode_address
     if self.address

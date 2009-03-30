@@ -8,6 +8,12 @@ class LocationsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @locations }
     end
+
+#    if RAILS_ENV == 'development'
+#      GeoIPClient.city('whatever')
+#    else
+#      GeoIPClient.city(remote.headers['remote_host']
+#    end
   end
 
   # GET /locations/1

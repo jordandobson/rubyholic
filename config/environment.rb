@@ -76,11 +76,15 @@ Rails::Initializer.run do |config|
   # For GEOKIT - INSTRUCTIONS at http://geokit.rubyforge.org/
   config.gem "andre-geokit", :lib=>'geokit', :source => 'http://gems.github.com'
   config.gem "thoughtbot-shoulda", :lib=>'shoulda', :source => 'http://gems.github.com'
+  config.gem "geoip", :lib=>'geoip'
 
 end
 
 require "will_paginate"
 require 'geoip_city'
+
+require "geokit"
+include GeoKit::Geocoders
 
 CITY_DB = GeoIPCity::Database.new("#{RAILS_ROOT}/lib/GeoLiteCity.dat")
 
